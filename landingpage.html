@@ -247,22 +247,26 @@
                     </div>
 
                      <div class="feature-card bg-white p-8 rounded-lg shadow-lg">
-                        <h3 class="text-2xl font-bold text-gray-800 mb-4">Asistente Virtual (Chatbot)</h3>
-                        <p class="text-gray-600 mb-6">¿Tienes una pregunta? Obtén ayuda al instante. Nuestro chatbot de IA integrado brinda soporte conversacional y orientación para preguntas frecuentes y tareas comunes. Es como tener un guía útil disponible 24/7, diseñado para que tu experiencia sea fluida y productiva.</p>
-                         <div class="w-full h-64 bg-gray-100 rounded-lg p-4 flex flex-col">
-                            <div class="flex-grow space-y-3">
-                                <div class="w-3/4 bg-green-100 text-green-800 p-2 rounded-lg">¡Hola! ¿En qué puedo ayudarte hoy?</div>
-                                <div class="flex justify-end">
-                                    <div class="w-3/4 bg-gray-200 p-2 rounded-lg">¿Dónde es el mejor lugar para parquear?</div>
-                                </div>
-                                <div class="w-3/4 bg-green-100 text-green-800 p-2 rounded-lg">La Zona 3 tiene poco tráfico en este momento. Puedo guiarte allí.</div>
-                            </div>
-                            <div class="mt-4 flex">
-                                <input type="text" placeholder="Escribe un mensaje..." class="w-full p-2 border rounded-l-lg focus:outline-none" disabled>
-                                <button class="bg-green-600 text-white p-2 rounded-r-lg">Enviar</button>
-                            </div>
-                        </div>
-                    </div>
+    <h3 class="text-2xl font-bold text-gray-800 mb-4">Asistente Virtual (Chatbot)</h3>
+    <p class="text-gray-600 mb-6">Nuestro asistente virtual brindara soporte conversacional 24/7, ofreciendo ayuda inmediata y orientación para todas tus preguntas y tareas comunes, haciendo tu experiencia fluida.</p>
+    <p class="text-lg font-bold text-gray-400 mb-4">¡interactua con tu asistente favorito!</p>
+    <div class="w-full h-64 bg-gray-100 rounded-lg p-4 flex flex-col">
+        
+        <div id="chat-messages" class="flex-grow space-y-3 overflow-y-auto">
+            <div class="w-3/4 bg-green-100 text-green-800 p-2 rounded-lg">¡Hola!☺️😎</div>
+        </div>
+        
+        <div class="mt-4 flex">
+            <input 
+                id="chat-input" 
+                type="text" 
+                placeholder="Escribe un mensaje..." 
+                class="w-full p-2 border rounded-l-lg focus:outline-none"
+            >
+            <button id="send-button" class="bg-green-600 text-white p-2 rounded-r-lg">Enviar</button>
+        </div>
+    </div>
+</div>
                 </div>
             </div>
         </section>
@@ -657,6 +661,6 @@ function onMapClick(latitud) {
     alert("Has dado click en latitud: " + latitud.latlng.lat +" y longitud:" + latitud.latlng.lng );
 } map.on('click', onMapClick);
     </script>
-
+    <script src="chatbot.js"></script>
 </body>
 </html>
