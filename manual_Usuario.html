@@ -17,30 +17,43 @@
   <!-- Estilos base y fuentes personalizadas (conservados y adaptados de ambos archivos) -->
   <style>
     body {
-      /* Base de landingpage.html */
+      /* Base de landingpage.html - mobile-first */
       font-family: 'CenaTrackFont', 'Inter', sans-serif;
       background-color: #FDFBF8;
       color: #374151;
-      /* Añadido para el header sticky */
-      padding-top: 80px; /* Ajustar si la altura del header cambia */
+      margin: 0;
     }
 
     /* Reglas de fuentes de la landing page, cruciales para la estética */
+    /* Tipografía mobile-first (no usar !important) */
     p {
-      font-family: 'Colombia Regular', sans-serif !important;
-      font-size: 1.60rem !important;
-      line-height: 1.6; /* Añadido para mejor legibilidad */
+      font-family: 'Colombia Regular', sans-serif;
+      font-size: 1rem; /* móvil */
+      line-height: 1.6;
+      margin-bottom: 1rem;
     }
-     h2 {
-      font-family: 'Colombia Bold', sans-serif !important;
-      font-size: 2rem !important;
-      margin-bottom: 1.25rem; /* Añadido para espaciado */
+    @media (min-width: 768px) {
+      p { font-size: 1.125rem; }
     }
+    @media (min-width: 1024px) {
+      p { font-size: 1.25rem; }
+    }
+
+    h2 {
+      font-family: 'Colombia Bold', sans-serif;
+      font-size: 1.5rem; /* móvil */
+      margin-bottom: 1rem;
+    }
+    @media (min-width: 768px) { h2 { font-size: 1.875rem; } }
+    @media (min-width: 1024px) { h2 { font-size: 2rem; } }
+
     h3 {
-      font-family: 'Colombia Bold', sans-serif !important;
-      font-size: 1.90rem !important;
-      margin-bottom: 1rem; /* Añadido para espaciado */
+      font-family: 'Colombia Bold', sans-serif;
+      font-size: 1.25rem; /* móvil */
+      margin-bottom: 0.75rem;
     }
+    @media (min-width: 768px) { h3 { font-size: 1.5rem; } }
+    @media (min-width: 1024px) { h3 { font-size: 1.875rem; } }
 
     /* Estilos de hover de la landing page (header) */
     .nav-link {
@@ -51,17 +64,20 @@
     }
     
     /* Estilos de la barra lateral de navegación */
-    .sidebar-nav .nav-link {
-        font-size: 1.5rem !important;
-        font-family: 'Colombia Regular', sans-serif !important;
-        font-weight: 600; /* semibold */
-        color: #4b5563; /* text-gray-600 */
-        padding: 0.25rem 1rem; /* py-1 pl-4 */
-        display: block;
-        border-left-width: 2px;
-        border-color: transparent;
-        margin-left: -1px; /* -ml-px */
-    }
+  .sidebar-nav .nav-link {
+    font-size: 1rem; /* mobile-friendly base */
+    font-family: 'Colombia Regular', sans-serif;
+    font-weight: 600; /* semibold */
+    color: #4b5563; /* text-gray-600 */
+    padding: 0.25rem 1rem; /* py-1 pl-4 */
+    display: block;
+    border-left-width: 2px;
+    border-color: transparent;
+    margin-left: -1px; /* -ml-px */
+  }
+  @media (min-width: 1024px) {
+    .sidebar-nav .nav-link { font-size: 1.125rem; }
+  }
     .sidebar-nav .nav-link:hover {
         color: #2563eb; /* text-blue-600 */
         border-left-color: #93c5fd; /* border-blue-300 */
@@ -127,37 +143,43 @@
     }
     
     /* Clases de estilo para contenido del manual */
-    .manual-content ul {
-        list-style-type: disc;
-        list-style-position: outside;
-        padding-left: 1.75rem;
-        margin-bottom: 1rem;
-        font-size: 1.60rem !important; /* Forzar tamaño de p */
-        font-family: 'Colombia Regular', sans-serif !important; /* Forzar fuente de p */
-    }
+  .manual-content ul {
+    list-style-type: disc;
+    list-style-position: outside;
+    padding-left: 1.75rem;
+    margin-bottom: 1rem;
+    font-size: 1rem; /* mobile-first */
+    font-family: 'Colombia Regular', sans-serif;
+  }
+  @media (min-width: 768px) { .manual-content ul { font-size: 1.125rem; } }
+  @media (min-width: 1024px) { .manual-content ul { font-size: 1.25rem; } }
     .manual-content ul li {
         margin-bottom: 0.5rem;
         line-height: 1.6;
     }
-    .manual-content ol {
-        list-style-type: decimal;
-        list-style-position: outside;
-        padding-left: 1.75rem;
-        margin-bottom: 1rem;
-        font-size: 1.60rem !important;
-        font-family: 'Colombia Regular', sans-serif !important;
-    }
+  .manual-content ol {
+    list-style-type: decimal;
+    list-style-position: outside;
+    padding-left: 1.75rem;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    font-family: 'Colombia Regular', sans-serif;
+  }
+  @media (min-width: 768px) { .manual-content ol { font-size: 1.125rem; } }
+  @media (min-width: 1024px) { .manual-content ol { font-size: 1.25rem; } }
     .manual-content ol li {
         margin-bottom: 0.5rem;
         line-height: 1.6;
     }
-    .manual-content h4 {
-        font-family: 'Colombia Bold', sans-serif !important;
-        font-size: 1.75rem !important;
-        color: #1f2937; /* text-gray-800 */
-        margin-top: 1.5rem;
-        margin-bottom: 0.75rem;
-    }
+  .manual-content h4 {
+    font-family: 'Colombia Bold', sans-serif;
+    font-size: 1.125rem;
+    color: #1f2937; /* text-gray-800 */
+    margin-top: 1.25rem;
+    margin-bottom: 0.5rem;
+  }
+  @media (min-width: 768px) { .manual-content h4 { font-size: 1.5rem; } }
+  @media (min-width: 1024px) { .manual-content h4 { font-size: 1.75rem; } }
     .manual-content table {
         width: 100%;
         text-align: left;
@@ -228,21 +250,23 @@
 
   <!-- Header de landingpage.html (adaptado) -->
   <header id="header" class="bg-white/80 backdrop-blur-md fixed top-0 left-0 right-0 z-[1000] shadow-sm">
-      <nav class="container mx-auto px-6 py-4 flex justify-between items-center z-[1000]">
-          <a href="landingpage.html" class="text-[1.570rem] font-bold text-gray-800 transform hover:scale-110 transition duration-300 ease-in-out"><img src="cenatrack2.png" alt="CenaTrack Logo" style="height: 60px; width: auto;" loading="lazy"></a>
-          <div class="hidden md:flex space-x-12 z-[1000]">
-              <a href="index.html" class="nav-link text-black-900 font-bold font-colombia-bold text-[1.970rem] transform hover:scale-125 transition duration-300 ease-in-out">Inicio</a>
-              <a href="#presentacion" class="nav-link text-black-900 font-bold font-colombia-bold text-[1.970rem] transform hover:scale-125 transition duration-300 ease-in-out">Presentación</a>
-              <a href="#funciones" class="nav-link text-black-900 font-bold font-colombia-bold text-[1.970rem] transform hover:scale-125 transition duration-300 ease-in-out">Funciones</a>
-              <a href="#roles" class="nav-link text-black-900 font-bold font-colombia-bold text-[1.970rem] transform hover:scale-125 transition duration-300 ease-in-out">Roles</a>
-              <a href="#faq" class="nav-link text-black-900 font-bold font-colombia-bold text-[1.970rem] transform hover:scale-125 transition duration-300 ease-in-out">FAQ</a>
-          </div>
-          <button id="mobile-menu-button" class="md:hidden text-gray-700 focus:outline-none">
+    <nav class="container mx-auto px-4 md:px-6 py-3 md:py-4 flex justify-between items-center z-[1000]">
+      <a href="landingpage.html" class="text-lg md:text-xl transform hover:scale-110 transition duration-300 ease-in-out">
+      <img src="cenatrack2.png" alt="CenaTrack Logo" class="h-12 md:h-16" loading="lazy">
+      </a>
+      <div class="hidden md:flex space-x-6 lg:space-x-12 z-[1000]">
+        <a href="index.html" class="nav-link text-gray-800 font-bold font-colombia-bold text-sm lg:text-base transform hover:scale-110 transition duration-300 ease-in-out">Inicio</a>
+        <a href="#presentacion" class="nav-link text-gray-800 font-bold font-colombia-bold text-sm lg:text-base transform hover:scale-110 transition duration-300 ease-in-out">Presentación</a>
+        <a href="#funciones" class="nav-link text-gray-800 font-bold font-colombia-bold text-sm lg:text-base transform hover:scale-110 transition duration-300 ease-in-out">Funciones</a>
+        <a href="#roles" class="nav-link text-gray-800 font-bold font-colombia-bold text-sm lg:text-base transform hover:scale-110 transition duration-300 ease-in-out">Roles</a>
+        <a href="#faq" class="nav-link text-gray-800 font-bold font-colombia-bold text-sm lg:text-base transform hover:scale-110 transition duration-300 ease-in-out">FAQ</a>
+      </div>
+      <button id="mobile-menu-button" class="md:hidden text-gray-700 focus:outline-none p-2" aria-label="Abrir menú móvil" aria-expanded="false">
                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
           </button>
       </nav>
       <!-- Menú móvil -->
-      <div id="mobile-menu" class="hidden md:hidden px-8 pb-6 items-center justify-center bg-white/95 backdrop-blur-md">
+   <div id="mobile-menu" class="hidden md:hidden px-4 pb-4 flex flex-col space-y-2 bg-white/95 backdrop-blur-md">
            <a href="index.html" class="block py-2 nav-link text-black-900 font-bold font-colombia-bold mx-5 text-center">Inicio</a>
            <a href="#presentacion" class="block py-2 nav-link text-black-900 font-bold font-colombia-bold mx-5 text-center">Presentación</a>
            <a href="#funciones" class="block py-2 nav-link text-black-900 font-bold font-colombia-bold mx-5 text-center">Funciones</a>
@@ -252,7 +276,7 @@
   </header>
   
   <!-- Contenedor principal con layout de Tailwind -->
-  <div class="container mx-auto px-6 py-16 md:py-24">
+  <div class="container mx-auto px-6 py-16 md:py-24 mt-20">
 
     <!-- Encabezado del Manual (Estilizado) -->
     <header id="manual-header" class="text-center mb-16">
@@ -490,12 +514,15 @@
   <!-- Scripts de landingpage.html (Solo menú móvil y scroll-spy) -->
   <script>
       document.addEventListener('DOMContentLoaded', () => {
-          // Lógica del menú móvil
-          const mobileMenuButton = document.getElementById('mobile-menu-button');
-          const mobileMenu = document.getElementById('mobile-menu');
-          mobileMenuButton.addEventListener('click', () => {
-              mobileMenu.classList.toggle('hidden');
-          });
+      // Lógica del menú móvil
+      const mobileMenuButton = document.getElementById('mobile-menu-button');
+      const mobileMenu = document.getElementById('mobile-menu');
+      mobileMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+        // Actualizar aria-expanded para accesibilidad
+        const expanded = mobileMenu.classList.contains('hidden') ? 'false' : 'true';
+        mobileMenuButton.setAttribute('aria-expanded', expanded);
+      });
 
           // Lógica de Scroll-spy para los enlaces de navegación
           const navLinks = document.querySelectorAll('.nav-link');
@@ -539,12 +566,15 @@
               }
           });
           
-          // Cerrar menú móvil al hacer clic en un enlace
-          mobileMenu.querySelectorAll('a').forEach(link => {
-              link.addEventListener('click', () => {
-                  mobileMenu.classList.add('hidden');
-              });
+      // Cerrar menú móvil al hacer clic en un enlace
+      if (mobileMenu) {
+        mobileMenu.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+            mobileMenuButton.setAttribute('aria-expanded', 'false');
           });
+        });
+      }
       });
   </script>
 
