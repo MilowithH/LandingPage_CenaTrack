@@ -16,88 +16,24 @@
 
   <!-- Estilos base y fuentes personalizadas (conservados y adaptados de ambos archivos) -->
   <style>
+    /* ===== Tipografía centralizada y consistente =====
+       Objetivo: todo el contenido (p, listas, tablas, enlaces) comparte el mismo tamaño
+       y los títulos (h2,h3,h4) mantienen tamaños propios y consistentes en toda la página. */
+
     body {
-      /* Base de landingpage.html - mobile-first */
       font-family: 'CenaTrackFont', 'Inter', sans-serif;
       background-color: #FDFBF8;
       color: #374151;
-      margin: 18px;
+      margin: 12px;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
+    @media (min-width: 640px) { body { margin: 16px; } }
+    @media (min-width: 768px) { body { margin: 20px; } }
+    @media (min-width: 1024px) { body { margin: 30px; } }
 
-    /* Reglas de fuentes de la landing page, cruciales para la estética */
-    /* Tipografía mobile-first (no usar !important) */
-    p {
-      font-family: 'Colombia Regular', sans-serif;
-      font-size: 1rem; /* móvil */
-      line-height: 1.6;
-      margin-bottom: 1rem;
-    }
-    @media (min-width: 768px) {
-      p { font-size: 1.125rem; }
-    }
-    @media (min-width: 1024px) {
-      p { font-size: 1.25rem; }
-    }
-
-    h2 {
-      font-family: 'Colombia Bold', sans-serif;
-      font-size: 1.5rem; /* móvil */
-      margin-bottom: 1rem;
-    }
-    @media (min-width: 768px) { h2 { font-size: 1.875rem; } }
-    @media (min-width: 1024px) { h2 { font-size: 2rem; } }
-
-    h3 {
-      font-family: 'Colombia Bold', sans-serif;
-      font-size: 1.25rem; /* móvil */
-      margin-bottom: 0.75rem;
-    }
-    @media (min-width: 768px) { h3 { font-size: 1.5rem; } }
-    @media (min-width: 1024px) { h3 { font-size: 1.875rem; } }
-
-    /* Estilos de hover de la landing page (header) */
-    .nav-link {
-      transition: color 0.3s, border-color 0.3s;
-    }
-    header .nav-link.active, header .nav-link:hover {
-      color: #3182ce;
-    }
-    
-    /* Estilos de la barra lateral de navegación */
-  .sidebar-nav .nav-link {
-    font-size: 1rem; /* mobile-friendly base */
-    font-family: 'Colombia Regular', sans-serif;
-    font-weight: 600; /* semibold */
-    color: #4b5563; /* text-gray-600 */
-    padding: 0.25rem 1rem; /* py-1 pl-4 */
-    display: block;
-    border-left-width: 2px;
-    border-color: transparent;
-    margin-left: -1px; /* -ml-px */
-  }
-  @media (min-width: 1024px) {
-    .sidebar-nav .nav-link { font-size: 1.125rem; }
-  }
-    .sidebar-nav .nav-link:hover {
-        color: #2563eb; /* text-blue-600 */
-        border-left-color: #93c5fd; /* border-blue-300 */
-    }
-    .sidebar-nav .nav-link.active {
-        color: #2563eb; /* text-blue-600 */
-        font-weight: 700; /* font-bold */
-        border-left-color: #2563eb; /* border-blue-600 */
-    }
-
-    /* Estilo de "tarjeta" para el contenedor principal del contenido del manual */
-    .feature-card {
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-    .feature-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    }
-
-    /* Definiciones de @font-face (conservadas) */
+    /* Definición de fuentes locales (conservadas) */
     @font-face {
       font-family: 'Colombia Regular';
       src: url('./fonts/Colombia-Regular.ttf') format('truetype');
@@ -123,126 +59,138 @@
       font-style: italic;
     }
 
-    .font-colombia-regular {
+    .font-colombia-regular { font-family: 'Colombia Regular', sans-serif; font-weight: 400; }
+    .font-colombia-bold { font-family: 'Colombia Bold', sans-serif; font-weight: 700; }
+
+    /* Tamaños: definimos una base única para contenido */
+    .manual-content p,
+    .manual-content li,
+    .manual-content td,
+    .manual-content th,
+    .manual-content a,
+    .manual-content blockquote {
       font-family: 'Colombia Regular', sans-serif;
-      font-weight: 400;
+      font-size: 1rem; /* móvil: más pequeño para ajustar a pantallas */
+      line-height: 1.6;
+      margin-bottom: 0.8rem;
     }
-    .font-colombia-italic {
-      font-family: 'Colombia Italic', sans-serif;
-      font-style: italic;
-      font-weight: 400;
+    @media (min-width: 640px) {
+      .manual-content p, .manual-content li, .manual-content td, .manual-content th, .manual-content a { font-size: 1.1rem; }
     }
-    .font-colombia-bold {
-      font-family: 'Colombia Bold', sans-serif;
-      font-weight: 700;
+    @media (min-width: 768px) {
+      .manual-content p, .manual-content li, .manual-content td, .manual-content th, .manual-content a { font-size: 1.25rem; }
     }
-    .font-colombia-bold-italic {
-      font-family: 'Colombia Bold Italic', sans-serif;
-      font-style: italic;
-      font-weight: 700;
-    }
-    
-    /* Clases de estilo para contenido del manual */
-  .manual-content ul {
-    list-style-type: disc;
-    list-style-position: outside;
-    padding-left: 1.75rem;
-    margin-bottom: 1rem;
-    font-size: 1rem; /* mobile-first */
-    font-family: 'Colombia Regular', sans-serif;
-  }
-  @media (min-width: 768px) { .manual-content ul { font-size: 1.125rem; } }
-  @media (min-width: 1024px) { .manual-content ul { font-size: 1.25rem; } }
-    .manual-content ul li {
-        margin-bottom: 0.5rem;
-        line-height: 1.6;
-    }
-  .manual-content ol {
-    list-style-type: decimal;
-    list-style-position: outside;
-    padding-left: 1.75rem;
-    margin-bottom: 1rem;
-    font-size: 1rem;
-    font-family: 'Colombia Regular', sans-serif;
-  }
-  @media (min-width: 768px) { .manual-content ol { font-size: 1.125rem; } }
-  @media (min-width: 1024px) { .manual-content ol { font-size: 1.25rem; } }
-    .manual-content ol li {
-        margin-bottom: 0.5rem;
-        line-height: 1.6;
-    }
-  .manual-content h4 {
-    font-family: 'Colombia Bold', sans-serif;
-    font-size: 1.125rem;
-    color: #1f2937; /* text-gray-800 */
-    margin-top: 1.25rem;
-    margin-bottom: 0.5rem;
-  }
-  @media (min-width: 768px) { .manual-content h4 { font-size: 1.5rem; } }
-  @media (min-width: 1024px) { .manual-content h4 { font-size: 1.75rem; } }
-    .manual-content table {
-        width: 100%;
-        text-align: left;
-        border-collapse: collapse;
-        margin-top: 1rem;
-        margin-bottom: 1rem;
-        font-size: 1.50rem !important; /* Ligeramente más pequeño para tablas */
-    }
-    .manual-content th, .manual-content td {
-        padding: 0.75rem 1rem;
-        border-bottom: 1px solid #e5e7eb; /* border-gray-200 */
-        font-family: 'Colombia Bold', sans-serif !important;
-        vertical-align: top;
-        line-height: 1.6;
-    }
-    .manual-content thead {
-        background-color: #f9fafb; /* bg-gray-50 */
-    }
-    .manual-content thead th {
-        font-family: 'Colombia Bold', sans-serif !important;
-        font-size: 1.50rem !important;
-        color: #374151; /* text-gray-700 */
-    }
-    .manual-content a {
-        color: #2563eb; /* text-blue-600 */
-        text-decoration: none;
-        transition: text-decoration 0.2s;
-    }
-    .manual-content a:hover {
-        text-decoration: underline;
-    }
-    .manual-content a.btn {
-        display: inline-block;
-        background-color: #2563eb; /* bg-blue-600 */
-        color: #ffffff !important; /* Forzar color blanco */
-        font-family: 'Colombia Bold', sans-serif !important; /* Botones usan Inter */
-        font-size: 1rem !important; /* Tamaño de fuente de botón estándar */
-        font-weight: 700;
-        padding: 0.75rem 1.5rem;
-        border-radius: 9999px; /* rounded-full */
-        transition: background-color 0.3s;
-        text-decoration: none;
-        margin-top: 1rem;
-    }
-    .manual-content a.btn:hover {
-        background-color: #1d4ed8; /* bg-blue-700 */
-        text-decoration: none;
-    }
-    .manual-content ul.check li {
-      list-style-type: none;
-      position: relative;
-      padding-left: 2rem;
-    }
-    .manual-content ul.check li::before {
-      content: '✓';
-      position: absolute;
-      left: 0;
-      color: #22c55e; /* text-green-500 */
-      font-weight: 700;
-      font-size: 1.25rem;
-      top: -2px;
+    @media (min-width: 1024px) {
+      .manual-content p, .manual-content li, .manual-content td, .manual-content th, .manual-content a { font-size: 1.4rem; }
     }
 
+    /* Encabezados: tamaños propios y responsivos para todos los tamaños */
+    h1, .manual-content h1 { font-family: 'Colombia Bold', sans-serif; font-weight: 800; }
+    h1 { font-size: 1.6rem; margin-bottom: 0.6rem; }
+    @media (min-width: 640px) { h1 { font-size: 1.9rem; } }
+    @media (min-width: 768px) { h1 { font-size: 2.2rem; } }
+    @media (min-width: 1024px) { h1 { font-size: 2.5rem; } }
+
+    h2, .manual-content h2 {
+      font-family: 'Colombia Bold', sans-serif;
+      font-weight: 800;
+      font-size: 1.4rem;
+      margin-bottom: 0.9rem;
+      line-height: 1.35;
+    }
+    @media (min-width: 640px) { h2 { font-size: 1.7rem; } }
+    @media (min-width: 768px) { h2 { font-size: 2.0rem; } }
+    @media (min-width: 1024px) { h2 { font-size: 2.4rem; } }
+
+    h3, .manual-content h3 {
+      font-family: 'Colombia Bold', sans-serif;
+      font-weight: 700;
+      font-size: 1.2rem;
+      margin-bottom: 0.6rem;
+      line-height: 1.35;
+    }
+    @media (min-width: 640px) { h3 { font-size: 1.4rem; } }
+    @media (min-width: 768px) { h3 { font-size: 1.7rem; } }
+    @media (min-width: 1024px) { h3 { font-size: 2rem; } }
+
+    h4, .manual-content h4 {
+      font-family: 'Colombia Bold', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      margin-top: 0.8rem;
+      margin-bottom: 0.5rem;
+      line-height: 1.35;
+    }
+    @media (min-width: 640px) { h4 { font-size: 1.2rem; } }
+    @media (min-width: 768px) { h4 { font-size: 1.4rem; } }
+    @media (min-width: 1024px) { h4 { font-size: 1.7rem; } }
+
+    /* Listas y tablas responsivas */
+    .manual-content ul { padding-left: 1.2rem; margin-bottom: 0.8rem; list-style-type: disc; }
+    .manual-content ul li { line-height: 1.6; margin-bottom: 0.4rem; }
+    @media (min-width: 768px) {
+      .manual-content ul { padding-left: 1.8rem; margin-bottom: 1rem; }
+      .manual-content ul li { margin-bottom: 0.6rem; }
+    }
+    
+    .manual-content ol { padding-left: 1.5rem; margin-bottom: 0.8rem; list-style-type: decimal; list-style-position: outside; }
+    .manual-content ol li { line-height: 1.6; margin-bottom: 0.4rem; padding-left: 0.3rem; font-weight: 500; }
+    @media (min-width: 768px) {
+      .manual-content ol { padding-left: 2.2rem; margin-bottom: 1rem; }
+      .manual-content ol li { margin-bottom: 0.7rem; padding-left: 0.5rem; }
+    }
+
+    .manual-content table { width: 100%; border-collapse: collapse; margin: 0.8rem 0; }
+    .manual-content th, .manual-content td { padding: 0.5rem 0.7rem; border-bottom: 1px solid #e5e7eb; vertical-align: top; font-size: 0.9rem; }
+    @media (min-width: 768px) {
+      .manual-content th, .manual-content td { padding: 0.8rem 1rem; font-size: 1rem; }
+    }
+    .manual-content thead th { font-family: 'Colombia Bold', sans-serif; font-size: 1rem; color: #374151; }
+    @media (min-width: 768px) {
+      .manual-content thead th { font-size: 1.1rem; }
+    }
+
+    /* Enlaces y botones mantienen la misma base, pero con estilos visuales */
+    .manual-content a { color: #2563eb; text-decoration: none; }
+    .manual-content a:hover { text-decoration: underline; }
+    .manual-content a.btn { display:inline-block; background:#2563eb; color:#fff; padding:0.6rem 1.2rem; border-radius:9999px; font-weight:700; }
+
+    /* Barra lateral: responsiva y escalable */
+    .sidebar-nav .nav-link { 
+      font-family: 'Colombia Regular', sans-serif; 
+      font-size: 0.95rem;
+      padding: 0.25rem 0.6rem; 
+      color: #1f2937; 
+      display: block; 
+      font-weight: 600;
+    }
+    @media (min-width: 768px) {
+      .sidebar-nav .nav-link { font-size: 1.1rem; padding: 0.35rem 0.75rem; }
+    }
+    @media (min-width: 1024px) {
+      .sidebar-nav .nav-link { font-size: 1.25rem; padding: 0.35rem 0.9rem; }
+    }
+    .sidebar-nav .nav-link:hover { color:#2563eb; }
+    .sidebar-nav .nav-link.active { color:#2563eb; font-weight:700; }
+
+    /* Pequeños ajustes visuales */
+    .feature-card { transition: transform .25s, box-shadow .25s; padding: 1rem !important; }
+    @media (min-width: 768px) {
+      .feature-card { padding: 1.5rem !important; }
+    }
+    @media (min-width: 1024px) {
+      .feature-card { padding: 2.5rem !important; }
+    }
+    .feature-card:hover { transform: translateY(-6px); box-shadow: 0 8px 14px rgba(0,0,0,0.08); }
+
+    /* Secciones responsivas */
+    section { padding: 1rem 0 !important; }
+    @media (min-width: 768px) {
+      section { padding: 1.5rem 0 !important; }
+    }
+    @media (min-width: 1024px) {
+      section { padding: 2rem 0 !important; }
+    }
   </style>
 
 </head>
@@ -274,25 +222,25 @@
   </header>
   
   <!-- Contenedor principal con layout de Tailwind -->
-  <div class="container mx-auto px-6 py-16 md:py-24 mt-20">
+  <div class="container mx-auto px-3 sm:px-4 md:px-6 py-12 sm:py-16 md:py-24 mt-2 sm:mt-4">
 
     <!-- Encabezado del Manual (Estilizado) -->
-    <header id="manual-header" class="text-center mb-16">
-      <h1 class="font-colombia-bold text-4xl md:text-5xl text-gray-800">Manual de Usuario</h1>
-      <p class="text-2xl md:text-3xl font-colombia-regular text-blue-600 mt-2">CenaTrack</p>
-      <p class="text-lg md:text-xl text-gray-600 mt-4 max-w-3xl mx-auto font-inter !font-normal ">
+    <header id="manual-header" class="text-center mb-8 sm:mb-12 md:mb-16">
+        <h1 class="font-colombia-bold text-xl sm:text-2xl md:text-3xl lg:text-4xl text-gray-800">Manual de Usuario</h1>
+        <p class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-colombia-regular text-blue-600 mt-2">CenaTrack</p>
+        <p class="text-sm sm:text-base md:text-lg text-gray-600 mt-3 sm:mt-4 max-w-3xl mx-auto font-inter !font-normal">
           Guía amigable paso a paso para el sistema de navegación y asistencia en tiempo real de la Central de Abastos de Cúcuta (Cenabastos).
       </p>
     </header>
 
     <!-- Layout de Grid de Tailwind -->
-    <div class="lg:grid lg:grid-cols-4 lg:gap-12">
+    <div class="lg:grid lg:grid-cols-4 lg:gap-8">
       
       <!-- Barra lateral de navegación pegajosa -->
       <aside class="hidden lg:block lg:col-span-1">
-        <div class="sticky top-28 manual-content"> <!-- top-28 = 7rem = 112px (80px header + 32px gap) -->
-          <h3 class="font-colombia-bold !text-2xl mb-4">Índice</h3>
-          <ul class="space-y-2 border-l-2 border-gray-200 sidebar-nav">
+        <div class="sticky -mt-40 top-2 manual-content">
+          <h3 class="font-colombia-bold text-lg sm:text-xl md:text-2xl mb-3 sm:mb-4">Índivbvce</h3>
+          <ul class="space-y-1 sm:space-y-2 border-l-2 border-gray-200 sidebar-nav">
             <li><a href="#presentacion" class="nav-link">1. Presentación</a></li>
             <li><a href="#descripcion" class="nav-link">2. Descripción</a></li>
             <li><a href="#requisitos" class="nav-link">3. Requisitos</a></li>
@@ -307,9 +255,9 @@
           </ul>
           
           <!-- Contenido de la antigua barra lateral -->
-          <div class="mt-10 p-6 bg-gray-50 rounded-lg border">
-              <h3 class="font-colombia-bold !text-xl mb-3">Descargas</h3>
-              <p class="!text-base !font-inter !font-normal !text-gray-700">Pide al autor el archivo .apk o enlaces a la appStore cuando este disponible.</p>
+          <div class="mt-6 sm:mt-10 p-4 sm:p-6 bg-gray-50 rounded-lg border">
+              <h3 class="font-colombia-bold text-base sm:text-lg md:text-xl mb-2 sm:mb-3">Descargas</h3>
+              <p class="!text-sm sm:!text-base !font-inter !font-normal !text-gray-700">Pide al autor el archivo .apk o enlaces a la appStore cuando este disponible.</p>
           </div>
         </div>
       </aside>
@@ -317,7 +265,7 @@
       <!-- Contenido Principal -->
       <main class="lg:col-span-3 manual-content">
         <!-- Contenedor único para todo el contenido del manual -->
-        <div class="bg-white p-6 md:p-10 rounded-lg shadow-lg feature-card">
+        <div class="bg-white p-4 sm:p-6 md:p-8 lg:p-10 rounded-lg shadow-lg feature-card">
 
           <section id="presentacion" class="py-8 border-b border-gray-200">
             <h2>1. Presentación del Manual</h2>
@@ -329,25 +277,25 @@
             <p><strong>CenaTrack</strong> es una app móvil multiplataforma que ofrece orientación, información y asistencia en tiempo real dentro de Cenabastos. Su propósito es facilitar la localización de galpones, optimizar desplazamientos y ofrecer soporte mediante un asistente virtual llamado <em>CenaBot</em> (o <em>Celeste</em> en algunas versiones).</p>
 
             <h3>Funcionalidades principales</h3>
-            <ul>
+            <ol>
               <li>Mapa interactivo con galpones, rutas y zonas de carga.</li>
               <li>Asistente virtual (CenaBot) para preguntas frecuentes y rutas.</li>
               <li>Geolocalización en tiempo real dentro del recinto.</li>
               <li>Autenticación segura (Google + 2FA via Clerk).</li>
               <li>Modo invitado y modo offline básico.</li>
-            </ul>
+            </ol>
           </section>
 
           <section id="requisitos" class="py-8 border-b border-gray-200">
             <h2>3. Requisitos del sistema</h2>
             <p>Antes de usar la app, verifica lo siguiente:</p>
-            <ul class="check">
+            <ol>
               <li>Android 9+ o iOS 13+.</li>
               <li>Conexión a internet (mínimo 3 Mbps recomendado para funciones en tiempo real).</li>
               <li>GPS activado y permisos de localización concedidos.</li>
               <li>Al menos 200 MB de espacio libre.</li>
               <li>Cuenta Google para acceso completo (opcional: modo invitado).</li>
-            </ul>
+            </ol>
           </section>
 
           <section id="instalacion" class="py-8 border-b border-gray-200">
@@ -376,12 +324,12 @@
             <p>Desde aquí verás tu saludo, el mapa principal, campo de búsqueda y tus rutas recientes.</p>
 
             <h4>Mapa interactivo</h4>
-            <ul>
+            <ol class="list-decimal pl-6">
               <li>Usa gestos para acercar/alejar.</li>
               <li>Toca marcadores para ver detalles del galpón.</li>
               <li>Filtra por categorías (frutas, granos, transporte, etc.).</li>
               <li>Pulsa <strong>Ruta</strong> para obtener instrucciones paso a paso.</li>
-            </ul>
+            </ol>
 
             <h4>Asistente virtual (CenaBot / Celeste)</h4>
             <p>Escribe o selecciona preguntas frecuentes para obtener respuestas contextualizadas según tu ubicación y rol.</p>
@@ -578,4 +526,3 @@
 
 </body>
 </html>
-
