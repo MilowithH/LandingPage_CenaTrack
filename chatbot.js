@@ -120,7 +120,8 @@ window.onload = () => {
         return;
     }
     
-    chatInput.focus();
+   // chatInput.focus();    comento esta linea porque esta forzando la landing hacia el chat por lo cual esta mal ya que omite el poder ver el inicio de la pagina (portada)
+    
 
     // 2. Escucha el clic en el botón 'Enviar'
     sendButton.addEventListener('click', sendMessage);
