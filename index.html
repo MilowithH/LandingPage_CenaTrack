@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CenaTrack</title>
@@ -9,45 +8,63 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     
-    <!-- LEAFLET CSS CONECTION -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
     crossorigin=""/>
-    <!-- LEAFLET JavaScript CONECTION -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
     crossorigin=""></script>
     
     <link rel="shortcut icon" href="cenatrack.png" style="object-fit: contain;">
-              <!-- LEAFLET mapbox-API -->
-          <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.3.1/leaflet-omnivore.min.js'></script>
+    <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.3.1/leaflet-omnivore.min.js'></script>
     
-          <!-- Firebase -->
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-analytics-compat.js"></script>
- 
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-analytics-compat.js"></script>
+    
 
-    <!-- 
-    Chosen Palette: Harvest Tech
-    Application Structure Plan: A single-page, top-to-bottom narrative structure was chosen to guide the user logically from the app's value proposition to its specific features and future vision. This flow is ideal for a landing page, as it builds interest progressively. It starts with a Hero section to capture attention, moves to the "Why" (the problem/solution), then the "How" (interactive feature showcases), and finally a "What's Next" (vision and CTA). This is more persuasive than a dashboard or tabbed layout, which would be better for an internal tool. Key interactions include smooth scrolling, hover effects on feature cards, and an interactive chart to make planned features feel tangible.
-    Visualization & Content Choices: 
-    - Report Info: Market complexity -> Goal: Establish need -> Presentation: Side-by-side text blocks for problem/solution -> Justification: Clearly frames the app's purpose.
-    - Report Info: Real-Time Map -> Goal: Showcase core functionality -> Viz: Simulated map with animated markers (HTML/CSS) -> Justification: Visually communicates the "live tracking" concept without needing a real map API, keeping the page lightweight.
-    - Report Info: User Roles -> Goal: Show tailored experience -> Viz: Interactive cards with hover effects -> Justification: Allows users to quickly grasp the app's versatility for different user types.
-    - Report Info: Planned Analytics -> Goal: Demonstrate future value -> Viz: Bar Chart (Chart.js) -> Interaction: Hover tooltips -> Justification: Makes an abstract "planned feature" concrete and visually appealing, showing the kinds of insights admins will get.
-    - Report Info: Virtual Assistant -> Goal: Illustrate user support -> Viz: Stylized chat interface (HTML/CSS) -> Justification: A simple, universally understood visual that communicates the feature's function instantly.
-    CONFIRMATION: NO SVG graphics used. NO Mermaid JS used.
-    -->
     <style>
+        /* Aumentamos la base REM para mejorar la legibilidad en todo el sitio. */
+        /* 130% de la base por defecto (16px) => ~20.8px */
+        html {
+            font-size: 130%;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        /* Reducir un poco en pantallas pequeñas para evitar rompimiento de diseño */
+        @media (max-width: 640px) {
+            html { font-size: 115%; } /* ~18.4px */
+        }
+
+        /* Restauramos el tamaño de fuente de la barra de navegación
+           a valores fijos en px para que no crezcan con el cambio del root font-size */
+        .nav-link {
+            font-size: 22px !important; /* tamaño base comparable al anterior */
+            line-height: 1.2 !important;
+        }
+        @media (min-width: 768px) {
+            .nav-link {
+                font-size: 22px !important; /* tamaño en pantallas medianas/grandes */
+            }
+        }
+
         body {
             font-family: 'CenaTrackFont', 'Inter', sans-serif;
             background-color: #FDFBF8;
             color: #374151;
         }
+        /* --- Estilo requerido para la transición de imagen suave (fade) --- */
+#rotary-image {
+    transition: opacity 0.5s ease-in-out; 
+    opacity: 1; 
+}
+
+/* Clase que se añade y remueve en JavaScript para el efecto de desvanecimiento */
+#rotary-image.image-fade {
+    opacity: 0.3; 
+}
         .bg-hero {
             background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
             url(20250710_1043_Amanecer\ Moderno\ en\ Finca_\(1\).png);
@@ -94,12 +111,13 @@
             margin-right: auto;
             height: 300px;
             max-height: 400px;
+            font-size: 5rem;
         }
-         @media (min-width: 768px) {
-            .chart-container {
-                height: 400px;
-            }
-        }
+          @media (min-width: 768px) {
+              .chart-container {
+                  height: 400px;
+              }
+          }
         .map-marker {
             position: absolute;
             width: 16px;
@@ -146,7 +164,7 @@
         }
         p {
             font-family: 'Colombia Regular', sans-serif;
-            font-size: 1rem;  /* Base: móvil */
+            font-size: 1rem;  /* Base: móvil (1rem ahora es ~20.8px por el cambio a html) */
             line-height: 1.6;
         }
         
@@ -198,105 +216,255 @@
             }
         }
         @font-face {
-  font-family: 'Colombia Regular';
-  src: url('./fonts/Colombia-Regular.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-}
+            font-family: 'Colombia Regular';
+            src: url('./fonts/Colombia-Regular.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+        }
 
-@font-face {
-  font-family: 'Colombia Italic';
-  src: url('./fonts/Colombia-Regular-Italic.ttf') format('truetype');
-  font-weight: 400;
-  font-style: italic;
-}
+        @font-face {
+            font-family: 'Colombia Italic';
+            src: url('./fonts/Colombia-Regular-Italic.ttf') format('truetype');
+            font-weight: 400;
+            font-style: italic;
+        }
 
-@font-face {
-  font-family: 'Colombia Bold';
-  src: url('./fonts/Colombia-Bold.ttf') format('truetype');
-  font-weight: 700;
-  font-style: normal;
-}
+        @font-face {
+            font-family: 'Colombia Bold';
+            src: url('./fonts/Colombia-Bold.ttf') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+        }
 
-@font-face {
-  font-family: 'Colombia Bold Italic';
-  src: url('./fonts/Colombia-Bold-Italic.ttf') format('truetype');
-  font-weight: 700;
-  font-style: italic;
-}
-
-
-.font-colombia-regular {
-  font-family: 'Colombia Regular', sans-serif;
-  font-weight: 400;
-}
-
-.font-colombia-italic {
-  font-family: 'Colombia Italic', sans-serif;
-  font-style: italic;
-  font-weight: 400;
-}
-
-.font-colombia-bold {
-  font-family: 'Colombia Bold', sans-serif;
-  font-weight: 700;
-} 
-
-.font-colombia-bold-italic {
-  font-family: 'Colombia Bold Italic', sans-serif;
-  font-style: italic;
-  font-weight: 700;
-}
+        @font-face {
+            font-family: 'Colombia Bold Italic';
+            src: url('./fonts/Colombia-Bold-Italic.ttf') format('truetype');
+            font-weight: 700;
+            font-style: italic;
+        }
 
 
+        .font-colombia-regular {
+            font-family: 'Colombia Regular', sans-serif;
+            font-weight: 400;
+        }
+
+        .font-colombia-italic {
+            font-family: 'Colombia Italic', sans-serif;
+            font-style: italic;
+            font-weight: 400;
+        }
+
+        .font-colombia-bold {
+            font-family: 'Colombia Bold', sans-serif;
+            font-weight: 700;
+        } 
+
+        .font-colombia-bold-italic {
+            font-family: 'Colombia Bold Italic', sans-serif;
+            font-style: italic;
+            font-weight: 700;
+        }
     </style>
 </head>
 
 <body class="antialiased">
 
-    <header id="header" class="bg-white/80 backdrop-blur-md sticky top-0 z-[1000]  shadow-sm">
-        <nav class="container mx-auto px-4 md:px-6 py-3 md:py-4 flex justify-between items-center z-[1000]">
-            <a href="#" class="text-lg md:text-xl transform hover:scale-110 transition duration-300 ease-in-out">
-                <img src="cenatrack2.png" alt="CenaTrack Logo" style="height: 50px; width: auto;" class="md:h-16" loading="lazy">
-            </a>
-            <div class="hidden md:flex space-x-6 lg:space-x-12 z-[1000]">
-                <a href="#features" class="nav-link text-gray-800 font-bold font-colombia-bold text-2xl lg:text-3xl transform hover:scale-110 transition duration-300 ease-in-out">Módulos</a>
-                <a href="#roles" class="nav-link text-gray-800 font-bold font-colombia-bold text-2xl lg:text-3xl transform hover:scale-110 transition duration-300 ease-in-out">¿Para quién es?</a>
-                <a href="#vision" class="nav-link text-gray-800 font-bold font-colombia-bold text-2xl lg:text-3xl transform hover:scale-110 transition duration-300 ease-in-out">Nuestra visión</a>
-                <a href="manual_Usuario.html" class="nav-link text-gray-800 font-bold font-colombia-bold text-2xl lg:text-3xl transform hover:scale-110 transition duration-300 ease-in-out" >Manuales</a>
-                <a href="#cta" class="nav-link text-gray-800 font-bold font-colombia-bold text-2xl lg:text-3xl transform hover:scale-110 transition duration-300 ease-in-out">Descargar</a>
+    <header id="header" class="bg-white/80 backdrop-blur-md sticky top-0 z-[1000] shadow-sm">
+        <nav class="container mx-auto px-4 md:px-6 py-3 md:py-4 flex items-center z-[1000]">
+            <div class="flex items-center">
+                <a href="#" class="transform hover:scale-110 transition duration-300 ease-in-out flex items-center -ml-4 md:-ml-6 pr-4 lg:pr-6">
+                    <img src="cenatrack2.png" alt="CenaTrack Logo" style="height: 60px; width: auto;" class="h-[60px] md:h-[60px]" loading="lazy">
+                </a>
+            </div>
+            <div class="flex-1 flex justify-center items-center">
+                <div class="hidden md:flex space-x-6 lg:space-x-12 z-[1000]">
+                    <a href="#inicio" class="nav-link text-gray-800 font-bold font-colombia-bold text-2xl lg:text-3xl transform hover:scale-110 transition duration-300 ease-in-out">Inicio</a>
+                    <a href="#objetivos" class="nav-link text-gray-800 font-bold font-colombia-bold text-2xl lg:text-3xl transform hover:scale-110 transition duration-300 ease-in-out">Objetivos</a>
+                    <a href="#justificacion" class="nav-link text-gray-800 font-bold font-colombia-bold text-2xl lg:text-3xl transform hover:scale-110 transition duration-300 ease-in-out">Justificación</a>
+                    <a href="#metodologia" class="nav-link text-gray-800 font-bold font-colombia-bold text-2xl lg:text-3xl transform hover:scale-110 transition duration-300 ease-in-out">Metodología</a>
+                    <a href="#resultados" class="nav-link text-gray-800 font-bold font-colombia-bold text-2xl lg:text-3xl transform hover:scale-110 transition duration-300 ease-in-out">Resultados</a>
+                    <a href="#features" class="nav-link text-gray-800 font-bold font-colombia-bold text-2xl lg:text-3xl transform hover:scale-110 transition duration-300 ease-in-out">Módulos</a>
+                    <a href="#roles" class="nav-link text-gray-800 font-bold font-colombia-bold text-2xl lg:text-3xl transform hover:scale-110 transition duration-300 ease-in-out">¿Para quién es?</a>
+                    <a href="#vision" class="nav-link text-gray-800 font-bold font-colombia-bold text-2xl lg:text-3xl transform hover:scale-110 transition duration-300 ease-in-out">Nuestra visión</a>
+                    <a href="manual_Usuario.html" class="nav-link text-gray-800 font-bold font-colombia-bold text-2xl lg:text-3xl transform hover:scale-110 transition duration-300 ease-in-out" >Manuales</a>
+                    <a href="#cta" class="nav-link text-gray-800 font-bold font-colombia-bold text-2xl lg:text-3xl transform hover:scale-110 transition duration-300 ease-in-out">Descargar</a>
+                </div>
             </div>
             <button id="mobile-menu-button" class="md:hidden text-gray-700 focus:outline-none p-2" aria-label="Abrir menú móvil" aria-expanded="false">
-                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
             </button>
         </nav>
         <div id="mobile-menu" class="bg-white hidden md:hidden px-4 pb-4 flex flex-col space-y-2">
-             <a href="#features" class="block py-2 px-3 nav-link text-gray-800 font-bold font-colombia-bold text-xl rounded hover:bg-white/10 transition">Módulos</a>
-             <a href="#roles" class="block py-2 px-3 nav-link text-gray-800 font-bold font-colombia-bold text-xl rounded hover:bg-white/10 transition">¿Para quién es?</a>
-             <a href="#vision" class="block py-2 px-3 nav-link text-gray-800 font-bold font-colombia-bold text-xl rounded hover:bg-white/10 transition">Nuestra visión</a>
-             <a href="manual_Usuario.html" class="block py-2 px-3 nav-link text-gray-800 font-bold font-colombia-bold text-xl rounded hover:bg-white/10 transition" target="_blank">Manuales</a>
-             <a href="#cta" class="block py-2 px-3 nav-link text-gray-800 font-bold font-colombia-bold text-xl rounded hover:bg-white/10 transition">Descargar</a>
+            <a href="#inicio" class="block py-2 px-3 nav-link text-gray-800 font-bold font-colombia-bold text-x1 rounded hover:bg-white/10 transition">Inicio</a>
+            <a href="#objetivos" class="block py-2 px-3 nav-link text-gray-800 font-bold font-colombia-bold text-xl rounded hover:bg-white/10 transition">Objetivos</a>
+            <a href="#justificacion" class="block py-2 px-3 nav-link text-gray-800 font-bold font-colombia-bold text-xl rounded hover:bg-white/10 transition">Justificación</a>
+            <a href="#metodologia" class="block py-2 px-3 nav-link text-gray-800 font-bold font-colombia-bold text-xl rounded hover:bg-white/10 transition">Metodología</a>
+            <a href="#resultados" class="block py-2 px-3 nav-link text-gray-800 font-bold font-colombia-bold text-xl rounded hover:bg-white/10 transition">Resultados</a>
+            <a href="#features" class="block py-2 px-3 nav-link text-gray-800 font-bold font-colombia-bold text-xl rounded hover:bg-white/10 transition">Módulos</a>
+            <a href="#roles" class="block py-2 px-3 nav-link text-gray-800 font-bold font-colombia-bold text-xl rounded hover:bg-white/10 transition">¿Para quién es?</a>
+            <a href="#vision" class="block py-2 px-3 nav-link text-gray-800 font-bold font-colombia-bold text-xl rounded hover:bg-white/10 transition">Nuestra visión</a>
+            <a href="manual_Usuario.html" class="block py-2 px-3 nav-link text-gray-800 font-bold font-colombia-bold text-xl rounded hover:bg-white/10 transition" target="_blank">Manuales</a>
+            <a href="#cta" class="block py-2 px-3 nav-link text-gray-800 font-bold font-colombia-bold text-xl rounded hover:bg-white/10 transition">Descargar</a>
         </div>
     </header>
 
     <main>
-        <section id="hero" class="bg-hero text-white flex items-center justify-center min-h-screen">
+        <section id="inicio" class="bg-hero text-white flex items-center justify-center min-h-screen">
             <div class="container mx-auto px-7 text-center">
-                <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold leading-tight -mb 1 font-colombia-bold">
-                    La Central de Abastos Inteligente
+                <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight mb-4 font-colombia-bold">
+                    CenaTrack: Asistente Inteligente para Cenabastos
                 </h1>
-                <p class="text-base md:text-lg lg:text-xl text-gray-200 mb-80 max-w-3xl mx-auto font-colombia-regular"></p>
-                <a href="#cta" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full transition duration-300 transform hover:scale-105">
-                    Comenzar Ahora
-                </a>
+                <p class="text-xl md:text-2xl lg:text-3xl text-gray-200 mb-6 max-w-4xl mx-auto font-colombia-regular">
+                    
+                </p>
+                <div class="flex flex-col md:flex-row items-center justify-center max-w-5xl mx-auto space-y-8 md:space-y-0 md:space-x-12 pt-8">
+                    <div class="md:w-1/2 text-left md:-ml-8 lg:-ml-16">
+                        <p class="text-xl text-gray-200 mb-6 font-colombia-regular text-justify">
+                            CenaTrack es una solución que permite realizar consultas rápidas y precisas sobre la información contenida en documentos relacionados con el mercado de Cenabastos. El sistema procesa documentos (como archivos PDF de estado y precios de productos), extrae fragmentos relevantes, los indexa en una base de datos vectorial (ChromaDB) y expone una API que permite a una aplicación móvil obtener respuestas contextuales basadas únicamente en la información proporcionada.
+                        </p>
+                        <a href="#objetivos" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full transition duration-300 transform hover:scale-105">
+                            Ver Objetivos
+                        </a>
+                    </div>
+                    <div class="hero-body">
+            <!-- Image on the right -->
+            <div class="hero-image fade-in flex justify-center items-center">
+                 <img id="rotary-image" src="IMG/Pantalla 1.png" alt="Pantalla de la aplicación móvil CenaTrack" loading="lazy"
+                     class="max-h-72 md:max-h-96 w-auto rounded-xl shadow-2xl border-4 border-white transform md:translate-x-6 hover:scale-105 transition duration-500 ease-in-out">
+            </div>
+        </div>
+                </div>
             </div>
         </section>
-        
+
+        <section id="objetivos" class="py-16 md:py-24 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800">🎯 Objetivos del Proyecto</h2>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="feature-card text-center p-6 bg-white rounded-lg shadow-xl border-t-4 border-blue-500">
+                        <h3 class="text-xl font-bold mb-2 text-blue-800">Objetivo General</h3>
+                        <p class="text-gray-600">Diseñar e implementar un asistente conversacional que responda preguntas específicas utilizando únicamente la información contenida en los documentos proporcionados y almacenados en una base de datos vectorial local.</p>
+                    </div>
+                    <div class="feature-card text-center p-6 bg-white rounded-lg shadow-xl border-t-4 border-green-500">
+                        <h3 class="text-xl font-bold mb-2 text-green-800">Específico 1: Ingestión</h3>
+                        <p class="text-gray-600">Construir un pipeline de ingestión que lea documentos PDF, los divida en fragmentos y genere embeddings para su indexación en ChromaDB.</p>
+                    </div>
+                    <div class="feature-card text-center p-6 bg-white rounded-lg shadow-xl border-t-4 border-yellow-500">
+                        <h3 class="text-xl font-bold mb-2 text-yellow-800">Específico 2: API</h3>
+                        <p class="text-gray-600">Implementar una API REST (FastAPI) que consulte la base de datos vectorial y devuelva respuestas coherentes para la aplicación móvil.</p>
+                    </div>
+                    <div class="feature-card text-center p-6 bg-white rounded-lg shadow-xl border-t-4 border-red-500">
+                        <h3 class="text-xl font-bold mb-2 text-red-800">Específico 3: Interfaz</h3>
+                        <p class="text-gray-600">Desarrollar una interfaz móvil (React Native / Expo) que permita enviar consultas y visualizar respuestas en formato de chat.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="justificacion" class="py-16 md:py-24 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800">💡 Justificación y Valor</h2>
+                    <p class="text-gray-500 mt-2 max-w-2xl mx-auto">Transformando la información no estructurada en conocimiento accesible para el mercado.</p>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-blue-600 mb-4">El Problema y la Solución</h3>
+                        <p class="text-gray-700 mb-6 text-justify">
+                            En entornos de comercio mayorista, el acceso rápido a la información (precios, disponibilidad, especificaciones) es crucial. Muchas fuentes se encuentran en documentos no estructurados o PDFs que no son fácilmente consultables en tiempo real. CenaTrack propone transformar estos documentos en una base de conocimiento consultable semánticamente, reduciendo tiempos de búsqueda y minimizando errores humanos.
+                        </p>
+                        <p class="text-gray-700 mb-6 text-justify">
+                            La solución se justifica por su capacidad de estandarizar el acceso a la información documental y proporcionar respuestas precisas con base únicamente en fuentes proporcionadas por el usuario (principio de confianza en la fuente).
+                        </p>
+                    </div>
+                    
+                    <div class="p-8 bg-blue-50 rounded-lg shadow-xl border border-blue-200">
+                        <div class="justification-visual">
+                            <div class="visual-card">
+                                <h4 class="text-2xl font-bold text-blue-800 mb-4">Impacto Esperado</h4>
+                                <ul class="space-y-3 list-disc list-inside text-gray-700">
+                                    <li>Acceso inmediato a precios y especificaciones desde dispositivos móviles.</li>
+                                    <li>Consultas confiables basadas en documentos verificados.</li>
+                                    <li>Reducción del tiempo de búsqueda y mejora en la toma de decisiones.</li>
+                                    <li>Interfaz móvil accesible para diferentes actores del mercado.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="metodologia" class="py-16 md:py-24 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800">⚙️ Metodología de Desarrollo</h2>
+                    <p class="text-gray-500 mt-2 max-w-2xl mx-auto">Un proceso estructurado desde la investigación inicial hasta la evaluación final del sistema.</p>
+                </div>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="feature-card text-center p-6 bg-white rounded-lg shadow-lg border-b-4 border-purple-500">
+                        <div class="text-4xl mb-3 text-purple-600">🔬</div>
+                        <h3 class="text-xl font-bold mb-2">Fase 1: Investigación</h3>
+                        <p class="text-gray-600">Revisión de fuentes, selección de modelos de embeddings y definición del flujo de ingestión. Evaluación de herramientas clave: LangChain, ChromaDB y modelos de embeddings.</p>
+                    </div>
+                    <div class="feature-card text-center p-6 bg-white rounded-lg shadow-lg border-b-4 border-indigo-500">
+                        <div class="text-4xl mb-3 text-indigo-600">💻</div>
+                        <h3 class="text-xl font-bold mb-2">Fase 2: Desarrollo</h3>
+                        <p class="text-gray-600">Implementación del pipeline: carga de PDF, segmentación de texto (text splitter), generación de embeddings locales y persistencia en ChromaDB. Desarrollo de la API con FastAPI.</p>
+                    </div>
+                    <div class="feature-card text-center p-6 bg-white rounded-lg shadow-lg border-b-4 border-teal-500">
+                        <div class="text-4xl mb-3 text-teal-600">🚀</div>
+                        <h3 class="text-xl font-bold mb-2">Fase 3: Implementación</h3>
+                        <p class="text-gray-600">Despliegue local del backend con Uvicorn, exposición temporal mediante Ngrok para pruebas y desarrollo del frontend en React Native (Expo) con la interfaz tipo chat.</p>
+                    </div>
+                    <div class="feature-card text-center p-6 bg-white rounded-lg shadow-lg border-b-4 border-orange-500">
+                        <div class="text-4xl mb-3 text-orange-600">✅</div>
+                        <h3 class="text-xl font-bold mb-2">Fase 4: Evaluación</h3>
+                        <p class="text-gray-600">Pruebas funcionales: verificación de la precisión en la búsqueda semántica, pruebas de casos de uso y análisis de desempeño de la base de datos vectorial.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="resultados" class="py-16 md:py-24 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800">🏆 Resultados Obtenidos</h2>
+                    <p class="text-gray-500 mt-2 max-w-2xl mx-auto">Logros alcanzados en la construcción del asistente inteligente CenaTrack.</p>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-12 items-start">
+                    <div class="p-8 bg-green-50 rounded-lg shadow-xl border-l-4 border-green-500">
+                        <h3 class="text-2xl font-bold text-green-800 mb-4">Solución Operacional</h3>
+                        <p class="text-gray-700 text-justify">
+                            Se construyó un asistente de texto que consulta una base de conocimiento derivada de documentos PDF indexados en ChromaDB. La aplicación móvil realiza solicitudes a una API (FastAPI) y muestra respuestas contextuales en una interfaz tipo chat, demostrando la viabilidad de la consulta semántica local.
+                        </p>
+                    </div>
+                    
+                    <div class="p-8 bg-blue-50 rounded-lg shadow-xl border-l-4 border-blue-500">
+                        <h3 class="text-2xl font-bold text-blue-800 mb-4">Indicadores Clave de Éxito</h3>
+                        <ul class="space-y-3 list-disc list-inside text-gray-700">
+                            <li>Indexación Exitosa: Documentos PDF procesados y almacenados en ChromaDB.</li>
+                            <li>API Funcional: Endpoint REST que responde a consultas con fragmentos de texto relevantes.</li>
+                            <li>Aplicación Móvil: Interfaz (Expo / React Native) capaz de enviar consultas y recibir respuestas de la API.</li>
+                            <li>Búsqueda Semántica: Verificación de la precisión en la recuperación de información.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section id="problem-solution" class="py-16 md:py-24 bg-white">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-12">
-                     <h2 class="text-[2rem] md:text-4xl font-bold text-gray-800">Del Caos a la Coordinación</h2>
-                     <p class="text-gray-500 mt-2 max-w-2xl mx-auto">Cenabastos es vibrante pero complejo para quien le visita por primera vez. Damos claridad y asistencia a los retos logísticos y geograficos que enfrenta cada día.</p>
+                    <h2 class="text-[2rem] md:text-4xl font-bold text-gray-800">Del Caos a la Coordinación</h2>
+                    <p class="text-gray-500 mt-2 max-w-2xl mx-auto">Cenabastos es vibrante pero complejo para quien le visita por primera vez. Damos claridad y asistencia a los retos logísticos y geograficos que enfrenta cada día.</p>
                 </div>
                 <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
                     <div class="p-8 bg-red-50 rounded-lg border border-red-200">
@@ -319,8 +487,8 @@
         <section id="features" class="py-16 md:py-24">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-12">
-                     <h2 class="text-[1.570rem] md:text-4xl font-bold text-gray-800">Características Principales</h2>
-                     <p class="text-gray-500 mt-2 max-w-2xl mx-auto">Herramientas diseñadas para mejorar la visibilidad, la toma de decisiones y la coordinación.</p>
+                    <h2 class="text-[1.570rem] md:text-4xl font-bold text-gray-800">Características Principales</h2>
+                    <p class="text-gray-500 mt-2 max-w-2xl mx-auto">Herramientas diseñadas para mejorar la visibilidad, la toma de decisiones y la coordinación.</p>
                 </div>
 
                 <div class="grid md:grid-cols-1 lg:grid-cols-2 gap-8 items-center">
@@ -332,27 +500,27 @@
                         </div>
                     </div>
 
-                     <div class="feature-card bg-white p-8 rounded-lg shadow-lg">
-    <h3 class="text-2xl font-bold text-gray-800 mb-2">Asistente Virtual (Chatbot)</h3>
-    <p class="text-gray-600 mb-6">Nuestro asistente virtual brindara soporte conversacional 24/7, ofreciendo ayuda inmediata y orientación para todas tus preguntas y tareas comunes, haciendo tu experiencia fluida.</p>
-    <p class="text-lg font-bold text-gray-400 mb-4">¡interactua con tu asistente favorito!</p>
-    <div class="w-full h-96 bg-gray-100 rounded-lg p-4 flex flex-col">
-        
-        <div id="chat-messages" class="flex-grow space-y-3 overflow-y-auto">
-            <div class="w-3/4 bg-green-100 text-green-800 p-2 rounded-lg">¡Hola!☺️😎</div>
-        </div>
-        
-        <div class="mt-4 flex">
-            <input 
-                id="chat-input" 
-                type="text" 
-                placeholder="Escribe un mensaje..." 
-                class="w-full p-2 border rounded-l-lg focus:outline-none"
-            >
-            <button id="send-button" class="bg-green-600 text-white p-2 rounded-r-lg">Enviar</button>
-        </div>
-    </div>
-</div>
+                    <div class="feature-card bg-white p-8 rounded-lg shadow-lg">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-2">Asistente Virtual (Chatbot)</h3>
+                        <p class="text-gray-600 mb-6">Nuestro asistente virtual brindara soporte conversacional 24/7, ofreciendo ayuda inmediata y orientación para todas tus preguntas y tareas comunes, haciendo tu experiencia fluida.</p>
+                        <p class="text-lg font-bold text-gray-400 mb-4">¡interactua con tu asistente favorito!</p>
+                        <div class="w-full h-96 bg-gray-100 rounded-lg p-4 flex flex-col">
+                            
+                            <div id="chat-messages" class="flex-grow space-y-3 overflow-y-auto">
+                                <div class="w-3/4 bg-green-100 text-green-800 p-2 rounded-lg">¡Hola!☺️😎</div>
+                            </div>
+                            
+                            <div class="mt-4 flex">
+                                <input 
+                                    id="chat-input" 
+                                    type="text" 
+                                    placeholder="Escribe un mensaje..." 
+                                    class="w-full p-2 border rounded-l-lg focus:outline-none"
+                                >
+                                <button id="send-button" class="bg-green-600 text-white p-2 rounded-r-lg">Enviar</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -371,17 +539,17 @@
                         <p class="text-gray-600">Ubica rápidamente a los vendedores, consulta la disponibilidad de productos y planifica tus compras de manera eficiente.</p>
                     </div>
                     <div class="feature-card text-center p-6 bg-white rounded-lg border">
-                         <div class="text-4xl mb-4">🌱</div>
+                        <div class="text-4xl mb-4">🌱</div>
                         <h3 class="text-xl font-bold mb-2">Vendedores</h3>
                         <p class="text-gray-600">Aumenta tu visibilidad, gestiona el estado de tu puesto y conecta con más compradores.</p>
                     </div>
                     <div class="feature-card text-center p-6 bg-white rounded-lg border">
-                         <div class="text-4xl mb-4">🚚</div>
+                        <div class="text-4xl mb-4">🚚</div>
                         <h3 class="text-xl font-bold mb-2">Transportistas</h3>
                         <p class="text-gray-600">Encuentra las rutas más rápidas, visualiza la congestión en tiempo real y coordina recogidas y entregas sin complicaciones.</p>
                     </div>
                     <div class="feature-card text-center p-6 bg-white rounded-lg border">
-                         <div class="text-4xl mb-4">📊</div>
+                        <div class="text-4xl mb-4">📊</div>
                         <h3 class="text-xl font-bold mb-2">Administradores</h3>
                         <p class="text-gray-600">Supervisa la actividad del mercado, analiza los patrones de movimiento y optimiza el uso del espacio con potentes analíticas.</p>
                     </div>
@@ -392,8 +560,8 @@
         <section id="vision" class="py-16 md:py-24">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-12">
-                     <h2 class="text-[1.570rem] md:text-4xl font-bold text-gray-800">El Futuro es Impulsado por Datos</h2>
-                     <p class="text-gray-500 mt-2 max-w-2xl mx-auto">Nuestro trabajo no termina aquí. Continuamente desarrollamos nuevas funciones para aportar aún más valor y conocimiento a la comunidad de Cenabastos.</p>
+                    <h2 class="text-[1.570rem] md:text-4xl font-bold text-gray-800">El Futuro es Impulsado por Datos</h2>
+                    <p class="text-gray-500 mt-2 max-w-2xl mx-auto">Nuestro trabajo no termina aquí. Continuamente desarrollamos nuevas funciones para aportar aún más valor y conocimiento a la comunidad de Cenabastos.</p>
                 </div>
                 <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
                     <div>
@@ -402,7 +570,7 @@
                         <h3 class="text-2xl font-bold text-gray-800 mb-4">Datos Históricos y Registros de Ubicación (Próximamente)</h3>
                         <p class="text-gray-600">Al analizar los datos históricos de movimiento, podemos desbloquear potentes herramientas para la planificación logística, la rendición de cuentas y el análisis de tendencias. Esta función proporcionará un nivel de comprensión sin precedentes sobre la dinámica a largo plazo del mercado.</p>
                     </div>
-                     <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <div class="bg-white p-6 rounded-lg shadow-lg">
                         <div class="chart-container">
                             <canvas id="analyticsChart"></canvas>
                         </div>
@@ -414,42 +582,40 @@
 
         <section id="cta" class="py-16 md:py-24 bg-blue-600 text-white">
             <div class="container mx-auto px-6 text-center">
-                 <h2 class="text-[1.570rem] md:text-4xl font-bold mb-4">¿Listo para transformar tu día en el mercado?</h2>
-                 <p class="text-blue-100 mb-8 max-w-2xl mx-auto">Descarga la App de Cenabastos hoy y únete a la comunidad de vendedores, compradores y transportistas visionarios que están construyendo un mercado más eficiente y conectado.</p>
-                 <div class="flex justify-center space-x-4">
-                     <a href="#" class="bg-white text-blue-600 font-bold py-3 px-6 rounded-lg transition duration-300 hover:bg-gray-100">Descargar para iOS</a>
-                     <a href="#" class="bg-gray-800 text-white font-bold py-3 px-6 rounded-lg transition duration-300 hover:bg-gray-700">Descargar para Android</a>
-                 </div>
+                <h2 class="text-[1.570rem] md:text-4xl font-bold mb-4">¿Listo para transformar tu día en el mercado?</h2>
+                <p class="text-blue-100 mb-8 max-w-2xl mx-auto">Descarga la App de Cenabastos hoy y únete a la comunidad de vendedores, compradores y transportistas visionarios que están construyendo un mercado más eficiente y conectado.</p>
+                <div class="flex justify-center space-x-4">
+                    <a href="#" class="bg-white text-blue-600 font-bold py-3 px-6 rounded-lg transition duration-300 hover:bg-gray-100">Descargar para iOS</a>
+                    <a href="#" class="bg-gray-800 text-white font-bold py-3 px-6 rounded-lg transition duration-300 hover:bg-gray-700">Descargar para Android</a>
+                </div>
             </div>
         </section>
     </main>
     
     <footer class="w-full bg-gray-800 flex flex-col gap-8 px-4 md:px-8 lg:px-16 py-8 md:py-10">
-      <!-- Card: Logo + Text -->
-      <div class="flex flex-col md:flex-row items-center md:items-start gap-4 md:gap-6 w-full">
-        <img src="cenatrack1.png" alt="Logo CenaTrack" class="w-20 h-20 md:w-24 md:h-24 object-contain rounded-lg shadow-md bg-white p-2" loading="lazy" />
-        <div class="text-center md:text-left">
-          <h5 class="text-lg font-bold text-white font-inter mb-1">CenaTrack</h5>
-          <p class="text-xs md:text-sm text-white font-inter mb-2 max-w-xs">
-            Diseñado y construido con todo el amor del mundo por el equipo de 
-            <a href="#" class="team text-blue-300 hover:text-blue-100 transition">CenaTrack</a> con la ayuda de nuestros instructores y todo el equipo SENA.
-          </p>
-          <p class="text-xs md:text-sm text-white font-inter">&copy; 2025 CenaTrack. Todos los derechos reservados.</p>
+        <div class="flex flex-col md:flex-row items-center md:items-start gap-4 md:gap-6 w-full">
+            <img src="cenatrack1.png" alt="Logo CenaTrack" class="w-20 h-20 md:w-24 md:h-24 object-contain rounded-lg shadow-md bg-white p-2" loading="lazy" />
+            <div class="text-center md:text-left">
+                <h5 class="text-lg font-bold text-white font-inter mb-1">CenaTrack</h5>
+                <p class="text-xs md:text-sm text-white font-inter mb-2 max-w-xs">
+                    Diseñado y construido con todo el amor del mundo por el equipo de 
+                    <a href="#" class="team text-blue-300 hover:text-blue-100 transition">CenaTrack</a> con la ayuda de nuestros instructores y todo el equipo SENA.
+                </p>
+                <p class="text-xs md:text-sm text-white font-inter">&copy; 2025 CenaTrack. Todos los derechos reservados.</p>
+            </div>
         </div>
-      </div>
-      
-      <!-- Footer Form -->
-      <form action="#" method="POST" class="flex flex-col items-center w-full gap-3">
-        <div class="flex flex-col sm:flex-row gap-3 w-full">
-          <input type="text" name="NOMBRES_Y_APELLIDOS" placeholder="Ingresa tu nombre o apodo" required aria-label="Campo de nombre"
-            class="w-full sm:flex-1 px-3 py-2 border-b-2 border-white bg-transparent text-white placeholder-white font-inter focus:outline-none focus:border-blue-400 transition" />
-          <input type="email" name="CORREO_ELECTRONICO" placeholder="Ingresa tu correo electrónico" required aria-label="Campo de correo electrónico"
-            class="w-full sm:flex-1 px-3 py-2 border-b-2 border-white bg-transparent text-white placeholder-white font-inter focus:outline-none focus:border-blue-400 transition" />
-        </div>
-        <textarea name="SUGERENCIAS" rows="3" maxlength="500" placeholder="¿En qué podemos mejorar? (Máximo 500 caracteres)" required aria-label="Campo de sugerencias"
-          class="w-full px-3 py-2 border border-blue-600 rounded-lg font-inter mt-1 resize-vertical focus:outline-none focus:border-white placeholder-gray-800 transition"></textarea>
-        <button type="submit" class="bg-white text-gray-800 font-bold text-lg px-8 py-2 rounded-lg mt-2 w-full sm:w-auto hover:bg-gray-100 transition">Ingresar</button>
-      </form>
+        
+        <form action="#" method="POST" class="flex flex-col items-center w-full gap-3">
+            <div class="flex flex-col sm:flex-row gap-3 w-full">
+                <input type="text" name="NOMBRES_Y_APELLIDOS" placeholder="Ingresa tu nombre o apodo" required aria-label="Campo de nombre"
+                    class="w-full sm:flex-1 px-3 py-2 border-b-2 border-white bg-transparent text-white placeholder-white font-inter focus:outline-none focus:border-blue-400 transition" />
+                <input type="email" name="CORREO_ELECTRONICO" placeholder="Ingresa tu correo electrónico" required aria-label="Campo de correo electrónico"
+                    class="w-full sm:flex-1 px-3 py-2 border-b-2 border-white bg-transparent text-white placeholder-white font-inter focus:outline-none focus:border-blue-400 transition" />
+            </div>
+            <textarea name="SUGERENCIAS" rows="3" maxlength="500" placeholder="¿En qué podemos mejorar? (Máximo 500 caracteres)" required aria-label="Campo de sugerencias"
+                class="w-full px-3 py-2 border border-blue-600 rounded-lg font-inter mt-1 resize-vertical focus:outline-none focus:border-white placeholder-gray-800 transition"></textarea>
+            <button type="submit" class="bg-white text-gray-800 font-bold text-lg px-8 py-2 rounded-lg mt-2 w-full sm:w-auto hover:bg-gray-100 transition">Enviar</button>
+        </form>
     </footer>
 
     <script>
@@ -464,7 +630,7 @@
 
                 // function to decide if mobile menu is "active" and toggle hero background
                 function updateHeroBg() {
-                    const hero = document.querySelector('#hero');
+                    const hero = document.querySelector('#inicio'); // Cambiado a #inicio para la nueva sección
                     if (!hero) return;
                     // Consideramos activo si NO tiene la clase 'hidden', o si tiene aria-expanded="true",
                     // o si contiene clases tipo 'active' u 'open', o si su display computado no es 'none'.
@@ -543,25 +709,25 @@
                             display: false
                         },
                         title: {
-                             display: true,
-                             text: 'Market Activity by Zone',
-                             font: {
-                                size: 16
-                             },
-                             color: '#333'
+                                display: true,
+                                text: 'Market Activity by Zone',
+                                font: {
+                                    size: 16
+                                },
+                                color: '#333'
                         }
                     },
                     scales: {
                         y: {
                             beginAtZero: true,
-                             grid: {
-                                color: '#e5e7eb'
-                            }
+                                grid: {
+                                    color: '#e5e7eb'
+                                }
                         },
                         x: {
-                             grid: {
-                                display: false
-                            }
+                                grid: {
+                                    display: false
+                                }
                         }
                     }
                 }
@@ -571,214 +737,91 @@
         });
 
         //objeto de creación y despliegue del mapa
-var map = L.map('map').setView([7.9245969061005835,-72.49189616570473], 16.5);
-L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
-    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-}).addTo(map);
-// Importing firebase app initialization
-/* import firebase from "firebase/compat/app";
-import {initializeApp} from "firebase/app";
-import {getAuth} from "firebase/auth";
-import {getFirestore} from "firebase/firestore";
-*/
+        var map = L.map('map').setView([7.9245969061005835,-72.49189616570473], 16.5);
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+        // Importing firebase app initialization
+        /* import firebase from "firebase/compat/app";
+        import {initializeApp} from "firebase/app";
+        import {getAuth} from "firebase/auth";
+        import {getFirestore} from "firebase/firestore";
+        */
 
-// Importing firebase configuration from environment variables
-// IMPORTANTE: Las credenciales deben estar en un archivo .env o configuradas en el backend
-// No expongas las credenciales en el código fuente
-const firebaseConfig = {
-  apiKey: process.env.REACT_APP_FIREBASE_API_KEY || window.FIREBASE_CONFIG?.apiKey,
-  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN || window.FIREBASE_CONFIG?.authDomain,
-  databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL || window.FIREBASE_CONFIG?.databaseURL,
-  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID || window.FIREBASE_CONFIG?.projectId,
-  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET || window.FIREBASE_CONFIG?.storageBucket,
-  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID || window.FIREBASE_CONFIG?.messagingSenderId,
-  appId: process.env.REACT_APP_FIREBASE_APP_ID || window.FIREBASE_CONFIG?.appId,
-  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID || window.FIREBASE_CONFIG?.measurementId
-};
-
-if (!firebaseConfig.apiKey) {
-  console.warn("⚠️ Firebase no está configurado. Por favor, configura las variables de entorno.");
-}
-
-firebase.initializeApp(firebaseConfig);
-    
-    const db = firebase.database();
-
-// Initialize Firebase app
-
-
-
-
-
-// GeoJSON data for points and lines
-var IntPointsGeoJson=
-{
-    "type": "FeatureCollection",
-    "features": 
-        [
-    {
-        "type": "Feature",
-        "properties": {},
-      "geometry": {
-          "coordinates": [
-              -72.49282147971168,
-          7.925070364711516
-        ],
-        "type": "Point"
-    }
-        
-    },{
-      "type": "Feature",
-      "properties": {},
-      "geometry": {
-        "coordinates": [
-         -72.49342283632522,
-         7.926149928643696
-        ],
-        "type": "Point"
-                    }
-                }
-        ]
-    }
-    
-    var IntLinesGeoJson =
-        {
-          "type": "Feature",
-          "properties": {},
-          "geometry": {
-            "coordinates": [
-              [
-                -72.49264346809639,
-                7.922954193558198
-              ],
-              [
-                -72.49254720389833,
-                7.923514346763909
-              ],
-              [
-                -72.49290819464252,
-                7.926350855547142
-              ]
-            ],
-            "type": "LineString"
-                    }
+        // Importing firebase configuration from environment variables
+        // IMPORTANTE: Las credenciales deben estar en un archivo .env o configuradas en el backend
+        // No expongas las credenciales en el código fuente
+        // Firebase configuration - use window.FIREBASE_CONFIG if available, otherwise use process.env
+        // (Note: `process` is not defined in browsers unless a bundler replaces it at build time.)
+        const _env = (typeof process !== 'undefined' && process.env) ? process.env : {};
+        const firebaseConfig = {
+            apiKey: _env.REACT_APP_FIREBASE_API_KEY || window.FIREBASE_CONFIG?.apiKey || '',
+            authDomain: _env.REACT_APP_FIREBASE_AUTH_DOMAIN || window.FIREBASE_CONFIG?.authDomain || '',
+            databaseURL: _env.REACT_APP_FIREBASE_DATABASE_URL || window.FIREBASE_CONFIG?.databaseURL || '',
+            projectId: _env.REACT_APP_FIREBASE_PROJECT_ID || window.FIREBASE_CONFIG?.projectId || '',
+            storageBucket: _env.REACT_APP_FIREBASE_STORAGE_BUCKET || window.FIREBASE_CONFIG?.storageBucket || '',
+            messagingSenderId: _env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID || window.FIREBASE_CONFIG?.messagingSenderId || '',
+            appId: _env.REACT_APP_FIREBASE_APP_ID || window.FIREBASE_CONFIG?.appId || '',
+            measurementId: _env.REACT_APP_FIREBASE_MEASUREMENT_ID || window.FIREBASE_CONFIG?.measurementId || ''
         };
+
+        // Initialize Firebase if configuration exists
+        try {
+            if (firebaseConfig && (firebaseConfig.apiKey || firebaseConfig.projectId)) {
+                firebase.initializeApp(firebaseConfig);
+                if (firebase.analytics) {
+                    firebase.analytics();
+                }
+                console.info('Firebase inicializado correctamente.');
+            } else {
+                console.warn('Firebase config no encontrada: la aplicación Firebase no se inicializó.');
+            }
+        } catch (e) {
+            console.error('Error inicializando Firebase:', e);
+        }
+
+            // Lista de las imágenes que tienes en tu carpeta IMG/
+    const images = [
+        'IMG/Pantalla 1.png', 
+        'IMG/Pantalla 2.png',
+        'IMG/Pantalla 3.png',
+        'IMG/Pantalla 4.png',
+        'IMG/Pantalla 5.png',
+        'IMG/Pantalla 6.png',
+        'IMG/Pantalla 7.png',
+        'IMG/Pantalla 8.png',
+        'IMG/Pantalla 9.jpeg',
+        'IMG/Pantalla 10.jpeg',
+        'IMG/Pantalla 11.jpeg',
+        'IMG/Pantalla 12.png',
+        'IMG/Pantalla 13.png'
+    ];
+
+    let currentImageIndex = 0;
+    // Buscamos la imagen por el ID que le dimos en el HTML
+    const rotateImageElement = document.getElementById('rotary-image');
     
-        // Add the GeoJSON layers to the map
-    //L.geoJSON(IntPointsGeoJson, {}).addTo(map);
-    //L.geoJSON(IntLinesGeoJson, {
-      //  style: {
-      //      color: 'blue',
-      //      opacity: 0.5,
-       //     weight: 5,
-      //  }
-   // }).addTo(map);
+    if (rotateImageElement) {
+        
+        function rotateImage() {
+            // Calcula el índice de la siguiente imagen (vuelve a 0 si llega al final)
+            currentImageIndex = (currentImageIndex + 1) % images.length;
+            
+            // Aplica la clase para el efecto de desvanecimiento (fade-out)
+            rotateImageElement.classList.add('image-fade'); 
+            
+            // Espera un momento (500ms) y luego cambia la fuente y quita la clase de fade
+            setTimeout(() => {
+                rotateImageElement.src = images[currentImageIndex];
+                rotateImageElement.classList.remove('image-fade');
+            }, 500); // Este tiempo debe coincidir con la transición en el CSS
+        }
 
-
-// Adding a object for a marker with a custom icon (persona)
-var myIcon = L.icon({
-    iconUrl: "persona.png",
-    iconSize: [50, 50],
-    iconAnchor: [25, 50],
-    popupAnchor: [0, -50],
-    shadowUrl: "",
-    shadowSize: [68, 95],
-    shadowAnchor: [22, 94]
-});
-
-
-// Adding a marker to the map with the custom icon {}
-L.marker([7.9249173,-72.4918418],{icon:myIcon}).addTo(map)
-.bindPopup(' La Central de Abastos de todos los Nortesantandereanos.<br> Cenabastos.')
-.openPopup();
-
-// Adding a circle to the map
-// var circle= L.circle([7.9249173,-72.4918418,32], {
-   //  color: '#88A66A',
-    // fillColor: '#88A66A',
-    // fillOpacity: 0.5,
-  //   radius: 40
-// }).addTo(map);
-
-// Adding a circle to the map with each new user
-// 👤 Track user location with error handling
-    const userId = "user_" + Math.floor(Math.random() * 100000);
-    
-    const geoSuccessCallback = (pos) => {
-      const lat = pos.coords.latitude;
-      const lng = pos.coords.longitude;
-      db.ref("users/" + userId).set({ lat, lng, timestamp: Date.now() });
-    };
-    
-    const geoErrorCallback = (error) => {
-      console.warn("⚠️ Geolocalización no disponible:", error.message);
-      switch(error.code) {
-        case error.PERMISSION_DENIED:
-          console.warn("El usuario denegó los permisos de geolocalización");
-          break;
-        case error.POSITION_UNAVAILABLE:
-          console.warn("La posición no está disponible");
-          break;
-        case error.TIMEOUT:
-          console.warn("Timeout al obtener la geolocalización");
-          break;
-      }
-    };
-    
-    const geoOptions = {
-      enableHighAccuracy: false,
-      timeout: 5000,
-      maximumAge: 0
-    };
-    
-    navigator.geolocation.watchPosition(geoSuccessCallback, geoErrorCallback, geoOptions);
-
-    // 👥 Show all markers
-    const markers = {};
-    db.ref("users").on("value", (snapshot) => {
-      const users = snapshot.val();
-      if (!users) return;
-
-       for (let id in users) {
-    const u = users[id];
-    const latLng = [u.lat, u.lng];
-
-    if (markers[id]) {
-      // ✅ Move marker if it already exists
-      markers[id].setLatLng(latLng);
-    } else {
-      // ✅ Create new marker
-      markers[id] = L.marker(latLng, { icon: myIcon }).addTo(map)
-        .bindPopup("User: " + id);
+        // Inicia el carrusel: cambia la imagen cada 4 segundos (4000 ms)
+        setInterval(rotateImage, 4000); 
     }
-  }
-});
 
-      /*for (let id in markers) map.removeLayer(markers[id]);
-      for (let id in users) {
-        const u = users[id];
-        markers[id] = L.marker([u.lat, u.lng],{icon:myIcon}).addTo(map)
-          .bindPopup("User: " + id);
-          
-      }
-    });*/
-
-/* function addCircle(lat, lng) {
-    L.circle([lat, lng], {
-        color: '#FF0000',
-        fillColor: '#FF0000',
-        fillOpacity: 0.5,
-        radius: 20
-    }).addTo(map);
-}*/
-
-
-function onMapClick(latitud) {
-    alert("Has dado click en latitud: " + latitud.latlng.lat +" y longitud:" + latitud.latlng.lng );
-} map.on('click', onMapClick);
     </script>
-        <script src="chatbot.js"></script>
 </body>
-
 </html>
