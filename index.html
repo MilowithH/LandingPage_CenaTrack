@@ -401,7 +401,7 @@ La aplicación muestra posiciones, rutas internas y zonas del mercado, y además
     </div>
 </section>
 
-        <section id="justificacion" class="py-16 md:py-24 bg-white">
+        <section id="justificacion" class="py-16 md:py-10 bg-white">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-12">
                     <h2 class="text-3xl md:text-4xl font-bold text-gray-800">💡 Justificación y Valor</h2>
@@ -436,37 +436,55 @@ La aplicación muestra posiciones, rutas internas y zonas del mercado, y además
             </div>
         </section>
 
-        <section id="metodologia" class="py-16 md:py-24 bg-gray-50">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-12">
-                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800">⚙️ Metodología de Desarrollo</h2>
-                    <p class="text-gray-500 mt-2 max-w-2xl mx-auto">Un proceso estructurado desde la investigación inicial hasta la evaluación final del sistema.</p>
-                </div>
-                
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                    <div class="feature-card text-center p-6 bg-white rounded-lg shadow-lg border-b-4 border-purple-500">
-                        <div class="text-4xl mb-3 text-purple-600">🔬</div>
-                        <h3 class="text-xl font-bold mb-2">Fase 1: Investigación</h3>
-                        <p class="text-gray-600">Revisión de fuentes, selección de modelos de embeddings y definición del flujo de ingestión. Evaluación de herramientas clave: LangChain, ChromaDB y modelos de embeddings.</p>
-                    </div>
-                    <div class="feature-card text-center p-6 bg-white rounded-lg shadow-lg border-b-4 border-indigo-500">
-                        <div class="text-4xl mb-3 text-indigo-600">💻</div>
-                        <h3 class="text-xl font-bold mb-2">Fase 2: Desarrollo</h3>
-                        <p class="text-gray-600">Implementación del pipeline: carga de PDF, segmentación de texto (text splitter), generación de embeddings locales y persistencia en ChromaDB. Desarrollo de la API con FastAPI.</p>
-                    </div>
-                    <div class="feature-card text-center p-6 bg-white rounded-lg shadow-lg border-b-4 border-teal-500">
-                        <div class="text-4xl mb-3 text-teal-600">🚀</div>
-                        <h3 class="text-xl font-bold mb-2">Fase 3: Implementación</h3>
-                        <p class="text-gray-600">Despliegue local del backend con Uvicorn, exposición temporal mediante Ngrok para pruebas y desarrollo del frontend en React Native (Expo) con la interfaz tipo chat.</p>
-                    </div>
-                    <div class="feature-card text-center p-6 bg-white rounded-lg shadow-lg border-b-4 border-orange-500">
-                        <div class="text-4xl mb-3 text-orange-600">✅</div>
-                        <h3 class="text-xl font-bold mb-2">Fase 4: Evaluación</h3>
-                        <p class="text-gray-600">Pruebas funcionales: verificación de la precisión en la búsqueda semántica, pruebas de casos de uso y análisis de desempeño de la base de datos vectorial.</p>
-                    </div>
-                </div>
+       <section id="metodologia" class="py-16 md:py-24 bg-gray-50">
+    <div class="container mx-auto px-6">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800">⚙️ Metodología de Desarrollo</h2>
+            <p class="text-gray-500 mt-2 max-w-2xl mx-auto">Un proceso iterativo basado en Scrum que garantiza entregas continuas, validación temprana y adaptación al entorno dinámico de Cenabastos.</p>
+        </div>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+
+            <!-- FASE 1 -->
+            <div class="feature-card text-center p-6 bg-white rounded-lg shadow-lg border-b-4 border-purple-500">
+                <div class="text-4xl mb-3 text-purple-600">🔬</div>
+                <h3 class="text-xl font-bold mb-2">Fase 1: Investigación</h3>
+                <p class="text-gray-600">
+                    Se recopilaron requerimientos funcionales del entorno real de la central y se evaluaron alternativas tecnológicas para el sistema. La investigación incluyó el análisis de flujos de movilidad, la estructura geográfica interna de Cenabastos y los criterios de desempeño para geolocalización en tiempo real y módulos de IA. Esta fase definió el backlog inicial y los criterios de aceptación para los sprints.
+                </p>
             </div>
-        </section>
+
+            <!-- FASE 2 -->
+            <div class="feature-card text-center p-6 bg-white rounded-lg shadow-lg border-b-4 border-indigo-500">
+                <div class="text-4xl mb-3 text-indigo-600">💻</div>
+                <h3 class="text-xl font-bold mb-2">Fase 2: Desarrollo</h3>
+                <p class="text-gray-600">
+                    Durante sprints de dos semanas se construyeron los componentes esenciales: arquitectura cliente–servidor, mapa interactivo con geolocalización en tiempo real, backend para manejo de datos geoespaciales y el asistente conversacional con IA. Cada incremento pasó por pruebas unitarias, integración continua y revisión de criterios de calidad definidos en el SQA.
+                </p>
+            </div>
+
+            <!-- FASE 3 -->
+            <div class="feature-card text-center p-6 bg-white rounded-lg shadow-lg border-b-4 border-teal-500">
+                <div class="text-4xl mb-3 text-teal-600">🚀</div>
+                <h3 class="text-xl font-bold mb-2">Fase 3: Implementación</h3>
+                <p class="text-gray-600">
+                    Se desplegaron los módulos funcionales del sistema: mapa en tiempo real, asistente conversacional y API geoespacial. El backend fue ejecutado en entornos controlados con exposición temporal mediante Ngrok para pruebas móviles. Paralelamente, el frontend en React Native integró navegación, visualización geoespacial y consultas IA, garantizando compatibilidad y buen desempeño.
+                </p>
+            </div>
+
+            <!-- FASE 4 -->
+            <div class="feature-card text-center p-6 bg-white rounded-lg shadow-lg border-b-4 border-orange-500">
+                <div class="text-4xl mb-3 text-orange-600">✅</div>
+                <h3 class="text-xl font-bold mb-2">Fase 4: Evaluación</h3>
+                <p class="text-gray-600">
+                    Cada incremento fue sometido a pruebas funcionales, validación con usuarios y métricas de desempeño. Se verificó la precisión de la geolocalización, la estabilidad del sistema, la calidad de las respuestas del asistente IA y la experiencia de navegación interna. Las retrospectivas de cada sprint permitieron ajustar procesos, corregir defectos y garantizar mejora continua.
+                </p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
 
         <section id="resultados" class="py-16 md:py-24 bg-white">
             <div class="container mx-auto px-6">
