@@ -2,7 +2,7 @@
 // ** CONFIGURACIÓN CLAVE **
 // REEMPLAZA ESTA URL con la dirección pública de tu API de ngrok
 // =======================================================
-const API_URL = 'https://96319c86e1ce.ngrok-free.app/api/chat'; 
+const API_URL = 'https://9fe44f6da6ed.ngrok-free.app/api/chat'; 
 
 // Referencias a los elementos del DOM (usando los IDs que definimos)
 const chatInput = document.getElementById('chat-input');
