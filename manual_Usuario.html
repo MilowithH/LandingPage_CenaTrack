@@ -174,6 +174,7 @@
     .sidebar-nav .nav-link.active { color:#2563eb; font-weight:700; }
 
     /* Pequeños ajustes visuales */
+    .back-to-top { color: #fff !important; }
     .feature-card { transition: transform .25s, box-shadow .25s; padding: 1rem !important; }
     @media (min-width: 768px) {
       .feature-card { padding: 1.5rem !important; }
@@ -190,6 +191,19 @@
     }
     @media (min-width: 1024px) {
       section { padding: 2rem 0 !important; }
+    }
+
+    /* Estilos para pasos numerados (Instalación y Acceso) */
+    .installation-steps { list-style: none; padding-left: 0; margin: 0; }
+    .installation-steps li { margin-bottom: 1rem; }
+    .step { display: flex; gap: 1rem; align-items: flex-start; }
+    .step-badge { min-width: 36px; height: 36px; border-radius: 9999px; background: #cfe8ff; color: #1c64f2; display: inline-flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.95rem; box-shadow: 0 2px 6px rgba(2,6,23,0.06); }
+    .step-content h3 { margin: 0; font-size: 1.05rem; font-weight: 700; color: #111827; }
+    .step-content p { margin: 0.2rem 0 0 0; color: #6b7280; font-size: 0.95rem; }
+    @media (min-width: 768px) {
+      .installation-steps li { margin-bottom: 1.25rem; }
+      .step-badge { min-width: 42px; height: 42px; font-size: 1rem; }
+      .step-content h3 { font-size: 1.15rem; }
     }
   </style>
 
@@ -230,7 +244,7 @@
         <h1 class="font-colombia-bold text-xl sm:text-2xl md:text-3xl lg:text-4xl text-gray-800">Manual de Usuario</h1>
         <p class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-colombia-regular text-blue-600 mt-2">CenaTrack</p>
         <p class="text-sm sm:text-base md:text-lg text-gray-600 mt-3 sm:mt-4 max-w-3xl mx-auto font-inter !font-normal">
-          Guía amigable paso a paso para el sistema de navegación y asistencia en tiempo real de la Central de Abastos de Cúcuta (Cenabastos).
+          Tu guia paso a paso para dominar el sistema de navegacion de la central de Abastos.
       </p>
     </header>
 
@@ -251,7 +265,7 @@
             <li><a href="#roles" class="nav-link">7. Roles</a></li>
             <li><a href="#faq" class="nav-link">8. FAQ</a></li>
             <li><a href="#soporte" class="nav-link">9. Soporte</a></li>
-            <li><a href="#tecnico" class="nav-link">10. Técnico</a></li>
+            <li><a href="#tecnico" class="nav-link">10. Stack Técnico</a></li>
             <li><a href="terms.html" class="nav-link">11. Terminos y condiciones</a></li>
             <li><a href="#creditos" class="nav-link">12. Créditos</a></li>
           </ul>
@@ -270,159 +284,255 @@
         <div class="bg-white p-4 sm:p-6 md:p-8 lg:p-10 rounded-lg shadow-lg feature-card">
 
           <section id="presentacion" class="py-8 border-b border-gray-200">
-            <h2>1. Presentación del Manual</h2>
-            <p>¡Bienvenido al Manual de Usuario de <strong>CenaTrack</strong>! Este documento te guiará para instalar, configurar y usar la aplicación dentro de la Central de Abastos de Cúcuta (Cenabastos). Está pensado para usuarios con distintos niveles y roles: compradores, campesinos, transportadores y administradores.</p>
+            <h2>1. Presentación</h2>
+            <p>¡Bienvenido a <strong class="text-blue-600">CenaTrack</strong>! Este documento te guiará para instalar, configurar y aprevechar al máximo la aplicacion dentro de Cenabastos. Diseñado para compradores, transportadores y administrativos.</p>
           </section>
 
           <section id="descripcion" class="py-8 border-b border-gray-200">
             <h2>2. Descripción general</h2>
-            <p><strong>CenaTrack</strong> es una app móvil multiplataforma que ofrece orientación, información y asistencia en tiempo real dentro de Cenabastos. Su propósito es facilitar la localización de galpones, optimizar desplazamientos y ofrecer soporte mediante un asistente virtual llamado <em>CenaBot</em> (o <em>Celeste</em> en algunas versiones).</p>
+            <p>Una herramienta móvil para geolocalización en tiempo real. Facilitamos la localización de galpones y ofrecemos soporte mediante nuestro asistente <span class="text-blue-600 italic">Celeste</span>.</p>
 
-            <h3>Funcionalidades principales</h3>
-            <ol>
-              <li>Mapa interactivo con galpones, rutas y zonas de carga.</li>
-              <li>Asistente virtual (CenaBot) para preguntas frecuentes y rutas.</li>
-              <li>Geolocalización en tiempo real dentro del recinto.</li>
-              <li>Autenticación segura (Google + 2FA via Clerk).</li>
-              <li>Modo invitado y modo offline básico.</li>
-            </ol>
+            <div class="mt-4 rounded-lg overflow-hidden bg-blue-50 border border-blue-100 shadow-sm p-4" role="group" aria-labelledby="desc-features">
+              <ul class="space-y-3" id="desc-features">
+                <li class="flex items-start gap-3">
+                  <span class="inline-block w-2.5 h-2.5 mt-2 rounded-full bg-blue-600 flex-shrink-0" aria-hidden="true"></span>
+                  <span class="text-gray-700 font-colombia-regular">Mapa interactivo con rutas.</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <span class="inline-block w-2.5 h-2.5 mt-2 rounded-full bg-blue-600 flex-shrink-0" aria-hidden="true"></span>
+                  <span class="text-gray-700 font-colombia-regular">Asistente virtual con IA.</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <span class="inline-block w-2.5 h-2.5 mt-2 rounded-full bg-blue-600 flex-shrink-0" aria-hidden="true"></span>
+                  <span class="text-gray-700 font-colombia-regular">Geolocalización en vivo.</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <span class="inline-block w-2.5 h-2.5 mt-2 rounded-full bg-blue-600 flex-shrink-0" aria-hidden="true"></span>
+                  <span class="text-gray-700 font-colombia-regular">Seguridad 2FA via Clerk.</span>
+                </li>
+              </ul>
+            </div>
           </section>
 
           <section id="requisitos" class="py-8 border-b border-gray-200">
-            <h2>3. Requisitos del sistema</h2>
-            <p>Antes de usar la app, verifica lo siguiente:</p>
-            <ol>
-              <li>Android 9+ o iOS 13+.</li>
-              <li>Conexión a internet (mínimo 3 Mbps recomendado para funciones en tiempo real).</li>
-              <li>GPS activado y permisos de localización concedidos.</li>
-              <li>Al menos 200 MB de espacio libre.</li>
-              <li>Cuenta Google para acceso completo (opcional: modo invitado).</li>
-            </ol>
+            <h2>3. Requisitos</h2>
+            <p>Antes de utilizar la aplicación, verifica lo siguiente:</p>
+
+            <!-- Diseño tipo tarjeta con checks (cada item en su caja sutil y redondeada) -->
+            <div class="mt-4 rounded-lg overflow-hidden bg-blue-50 border border-blue-100 shadow-sm" role="list" aria-label="Requisitos">
+              <div class="p-4">
+                <div class="flex flex-col gap-3">
+                  <div class="flex items-start gap-3" role="listitem">
+                    <span class="inline-flex items-center justify-center w-9 h-9 rounded-full bg-white border border-blue-100 text-blue-600 shadow-sm flex-shrink-0" aria-hidden="true">
+                      <!-- Check icon -->
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-7.5 7.5a1 1 0 01-1.414 0l-3.5-3.5a1 1 0 011.414-1.414L8 11.086l6.793-6.793a1 1 0 011.414 0z" clip-rule="evenodd" />
+                      </svg>
+                    </span>
+                    <span class="text-gray-700 font-colombia-regular">Android 9+</span>
+                  </div>
+
+                  <div class="flex items-start gap-3" role="listitem">
+                    <span class="inline-flex items-center justify-center w-9 h-9 rounded-full bg-white border border-blue-100 text-blue-600 shadow-sm flex-shrink-0" aria-hidden="true">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-7.5 7.5a1 1 0 01-1.414 0l-3.5-3.5a1 1 0 011.414-1.414L8 11.086l6.793-6.793a1 1 0 011.414 0z" clip-rule="evenodd" />
+                      </svg>
+                    </span>
+                    <span class="text-gray-700 font-colombia-regular">Internet estable (3 Mbps)</span>
+                  </div>
+
+                  <div class="flex items-start gap-3" role="listitem">
+                    <span class="inline-flex items-center justify-center w-9 h-9 rounded-full bg-white border border-blue-100 text-blue-600 shadow-sm flex-shrink-0" aria-hidden="true">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-7.5 7.5a1 1 0 01-1.414 0l-3.5-3.5a1 1 0 011.414-1.414L8 11.086l6.793-6.793a1 1 0 011.414 0z" clip-rule="evenodd" />
+                      </svg>
+                    </span>
+                    <span class="text-gray-700 font-colombia-regular">GPS activado y permisos de localización concedidos</span>
+                  </div>
+
+                  <div class="flex items-start gap-3" role="listitem">
+                    <span class="inline-flex items-center justify-center w-9 h-9 rounded-full bg-white border border-blue-100 text-blue-600 shadow-sm flex-shrink-0" aria-hidden="true">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-7.5 7.5a1 1 0 01-1.414 0l-3.5-3.5a1 1 0 011.414-1.414L8 11.086l6.793-6.793a1 1 0 011.414 0z" clip-rule="evenodd" />
+                      </svg>
+                    </span>
+                    <span class="text-gray-700 font-colombia-regular">200 MB de almacenamiento</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </section>
 
           <section id="instalacion" class="py-8 border-b border-gray-200">
             <h2>4. Instalación y acceso</h2>
-            <h4>Paso 1: Descargar la app</h4>
-            <ol>
-              <li>Abre Google Play (Android) o App Store (iOS).</li>
-              <li>Busca "<strong>CenaTrack</strong>" y presiona <em>Instalar</em>.</li>
-              <li>Abre la app desde el ícono una vez instalada.</li>
+            <p class="mt-2 mb-4">Sigue estos pasos para instalar la aplicación y tu primer acceso al sistema.</p>
+            <ol class="installation-steps">
+              <li>
+                <div class="step">
+                  <div class="step-badge">1</div>
+                  <div class="step-content">
+                    <h3>Descarga</h3>
+                    <p>Busca "Cenatrack" en tu tienda de aplicaciones.</p>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="step">
+                  <div class="step-badge">2</div>
+                  <div class="step-content">
+                    <h3>Bienvenida</h3>
+                    <p>Desliza el carrusel informativo inicial.</p>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="step">
+                  <div class="step-badge">3</div>
+                  <div class="step-content">
+                    <h3>Login</h3>
+                    <p>Crea una cuenta personal o usa el modo Invitado.</p>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="step">
+                  <div class="step-badge">4</div>
+                  <div class="step-content">
+                    <h3>Verificación</h3>
+                    <p>Confirma tu identidad (si aplica).</p>
+                  </div>
+                </div>
+              </li>
             </ol>
-
-            <h4>Paso 2: Carrusel de bienvenida</h4>
-            <p>Al iniciar por primera vez verás 3 pantallas de introducción. Puedes deslizar o presionar <strong>Saltar</strong> para ir al inicio. En la última pantalla pulsa <strong>Empezar</strong>.</p>
-
-            <h4>Paso 3: Crear cuenta o entrar como invitado</h4>
-            <p>Puedes iniciar sesión con Google (recomendado) o usar el modo invitado con funciones limitadas.</p>
-
-            <h4>Paso 4: Verificación 2FA</h4>
-            <p>Si entras con Google, recibirás un código por correo para completar la verificación en dos pasos (Clerk).</p>
           </section>
 
           <section id="pantallas" class="py-8 border-b border-gray-200">
-            <h2>5. Pantallas principales y navegación</h2>
+            <h2>5. Pantallas principales</h2>
 
-            <h4>Pantalla de inicio (Home)</h4>
-            <p>Desde aquí verás tu saludo, el mapa principal, campo de búsqueda y tus rutas recientes.</p>
-
-            <h4>Mapa interactivo</h4>
-            <ol class="list-decimal pl-6">
-              <li>Usa gestos para acercar/alejar.</li>
-              <li>Toca marcadores para ver detalles del galpón.</li>
-              <li>Filtra por categorías (frutas, granos, transporte, etc.).</li>
-              <li>Pulsa <strong>Ruta</strong> para obtener instrucciones paso a paso.</li>
-            </ol>
-
-            <h4>Asistente virtual (CenaBot / Celeste)</h4>
-            <p>Escribe o selecciona preguntas frecuentes para obtener respuestas contextualizadas según tu ubicación y rol.</p>
-
-            <h4>Perfil y configuración</h4>
-            <p>Desde el ícono de perfil puedes editar datos, cerrar sesión y ajustar notificaciones.</p>
+            <p><Strong>Inicio: </Strong>Mapa central de busqueda rápida.</p>
+            <p><Strong>Mapa: </Strong>Gestos táctiles, filtros por categoria y trazar de rutas.</p>
+            <p><Strong>Asistente: </Strong>Chatbot contextualizado.</p>
+            <p><Strong>Perfil: </Strong>Gestión de cuentas y ajustes.</p>
+            
           </section>
 
           <section id="funciones" class="py-8 border-b border-gray-200">
-            <h2>6. Funciones destacadas</h2>
-            <div class="overflow-x-auto">
-              <table>
-                <thead>
-                  <tr><th>Función</th><th>Descripción</th><th>Disponible para</th></tr>
-                </thead>
-                <tbody>
-                  <tr><td>Inicio de sesión con Google</td><td>Acceso rápido con cuenta Google</td><td>Todos</td></tr>
-                  <tr><td>Verificación 2FA</td><td>Seguridad extra via Clerk</td><td>Usuarios registrados</td></tr>
-                  <tr><td>Mapa interactivo</td><td>Visualización de galpones y rutas</td><td>Todos</td></tr>
-                  <tr><td>Asistente virtual</td><td>Respuestas y guías</td><td>Todos</td></tr>
-                  <tr><td>Modo invitado</td><td>Explorar sin registrarse</td><td>Invitados</td></tr>
-                  <tr><td>Rutas personalizadas</td><td>Indicaciones paso a paso</td><td>Usuarios registrados</td></tr>
-                </tbody>
-              </table>
+            <h2>6. Funciones Destacadas</h2>
+            <!-- Lista tipo tarjeta que coincide con la imagen adjunta -->
+            <div class="mt-4 rounded-lg overflow-hidden bg-gray-50 border border-gray-100 shadow-sm">
+              <!-- Item 1 -->
+              <div class="px-4 py-3 border-b border-gray-200">
+                <div class="flex justify-between items-start">
+                  <div>
+                    <h3 class="text-base font-colombia-bold text-gray-800">Inicio con código de verificación</h3>
+                    <p class="text-sm text-gray-500 mt-1">Acceso rápido y seguro</p>
+                  </div>
+                </div>
+              </div>
+              <!-- Item 2 -->
+              <div class="px-4 py-3 border-b border-gray-200">
+                <div class="flex justify-between items-start">
+                  <div>
+                    <h3 class="text-base font-colombia-bold text-gray-800">Rutas Inteligentes</h3>
+                    <p class="text-sm text-gray-500 mt-1">Indicaciones paso a paso</p>
+                  </div>
+                </div>
+              </div>
+              <!-- Item 3 -->
+              <div class="px-4 py-3 border-b border-gray-200">
+                <div class="flex justify-between items-start">
+                  <div>
+                    <h3 class="text-base font-colombia-bold text-gray-800">Busqueda de tarifas y horarios</h3>
+                    <p class="text-sm text-gray-500 mt-1">Asistencia del chatbot para brindar información al usuario</p>
+                  </div>
+                </div>
+              </div>
+              <!-- Item 4 -->
+              <div class="px-4 py-3">
+                <div class="flex justify-between items-start">
+                  <div>
+                    <h3 class="text-base font-colombia-bold text-gray-800">Modo invitado</h3>
+                    <p class="text-sm text-gray-500 mt-1">Funciones básicas sin conexión de usuario</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </section>
 
           <section id="roles" class="py-8 border-b border-gray-200">
-            <h2>7. Roles de usuario</h2>
-            <h4>Compradores</h4>
-            <p>Buscan productos y locales; usan rutas y el asistente para encontrar ofertas o servicios.</p>
+            <h2>7. Roles</h2>
+            <p class="mt-3 text-gray-700">Opciones de usuario y permisos según el uso dentro de la plataforma:</p>
 
-            <h4>Transportadores</h4>
-            <p>Necesitan zonas de carga/descarga, rutas optimizadas y horarios de acceso.</p>
+            <!-- Pills de roles -->
+            <div class="mt-4 flex flex-wrap gap-3">
+              <span class="inline-flex items-center py-2 px-4 rounded-full bg-blue-50 border border-blue-100 text-blue-600 font-colombia-regular">Compradores</span>
+              <span class="inline-flex items-center py-2 px-4 rounded-full bg-blue-50 border border-blue-100 text-blue-600 font-colombia-regular">Transportadores</span>
+              <span class="inline-flex items-center py-2 px-4 rounded-full bg-blue-50 border border-blue-100 text-blue-600 font-colombia-regular">Administradores</span>
+              <span class="inline-flex items-center py-2 px-4 rounded-full bg-blue-50 border border-blue-100 text-blue-600 font-colombia-regular">Campesinos</span>
+            </div>
 
-            <h4>Administradores</h4>
-            <p>Supervisan actividad, reciben PQRS y gestionan contenido desde el panel administrativo (funciones extendidas en versiones futuras).</p>
-          </section>
+            <div class="mt-6">
+              <h4>Compradores</h4>
+              <p>Buscan productos y locales; usan rutas y el asistente para encontrar ofertas o servicios.</p>
 
-          <section id="faq" class="py-8 border-b border-gray-200">
-            <h2>8. Preguntas frecuentes (FAQ)</h2>
-            <ol>
-              <li><strong>¿Necesito internet?</strong> Sí para mapa y asistente; hay modo offline básico.</li>
-              <li><strong>¿No tengo Google?</strong> Usa modo invitado con funciones limitadas.</li>
-              <li><strong>¿Cómo activo ubicación?</strong> Ajustes del teléfono → Ubicación → Permitir a CenaTrack.</li>
-              <li><strong>Mapa en blanco?</strong> Revisa tu conexión, reinicia la app o limpia caché.</li>
-              <li><strong>¿Fuera de Cenabastos?</strong> Actualmente no; la app está diseñada para Cenabastos.</li>
-            </ol>
-          </section>
+              <h4>Transportadores</h4>
+              <p>Necesitan zonas de carga/descarga, rutas optimizadas y horarios de acceso.</p>
 
-          <section id="soporte" class="py-8 border-b border-gray-200">
-            <h2>9. Solución de problemas comunes</h2>
-            <div class="overflow-x-auto">
-              <table>
-                <thead><tr><th>Problema</th><th>Causa posible</th><th>Solución</th></tr></thead>
-                <tbody>
-                  <tr><td>GPS no detecta</td><td>Permisos o GPS desactivado</td><td>Activa ubicación y permisos</td></tr>
-                  <tr><td>Asistente no responde</td><td>Conexión o mantenimiento</td><td>Intentar más tarde</td></tr>
-                  <tr><td>Verificación no llega</td><td>Retraso de correo</td><td>Revisar spam o solicitar nuevo código</td></tr>
-                  <tr><td>No veo galpones</td><td>Carga lenta</td><td>Esperar o reiniciar app</td></tr>
-                  <tr><td>App no abre</td><td>Instalación corrupta</td><td>Reinstalar aplicación</td></tr>
-                </tbody>
-              </table>
+              <h4>Administradores</h4>
+              <p>Supervisan actividad, reciben PQRS y gestionan contenido desde el panel administrativo (funciones extendidas en versiones futuras).</p>
             </div>
           </section>
 
-          <section id="tecnico" class="py-8 border-b border-gray-200">
-            <h2>10. Información técnica resumida</h2>
-            <p>Resumen técnico pensado para administradores y soporte.</p>
+          <section id="faq" class="py-8 border-b border-gray-200">
+            <h2>8. FAQ</h2>
+            <div class="mt-4 space-y-6">
+              <div>
+                <h3 class="text-xl sm:text-2xl font-colombia-bold text-gray-800">¿¿Necesito internet?</h3>
+                <p class="text-gray-500 border-l-4 border-blue-100 pl-4 mt-2">Sí, para el mapa en vivo y el asistente.</p>
+              </div>
+              <div>
+                <h3 class="text-xl sm:text-2xl font-colombia-bold text-gray-800">¿¿El mapa está blanco?</h3>
+                <p class="text-gray-500 border-l-4 border-blue-100 pl-4 mt-2">Limpia caché o verifica tu conexión.</p>
+              </div>
+              <div>
+                <h3 class="text-xl sm:text-2xl font-colombia-bold text-gray-800">¿¿Funciona fuera de Cenabastos?</h3>
+                <p class="text-gray-500 border-l-4 border-blue-100 pl-4 mt-2">No, está geolocalizada al recinto.</p>
+              </div>
+            </div>
+          </section>
 
-            <h4>Arquitectura</h4>
-            <p>React Native + Expo (móvil), Node.js (backend), NeonDB/Postgres (datos), Clerk (auth), Google Generative AI / Gemini (chatbot), Google Maps / Geoapify (mapas).</p>
-
-            <h4>Entorno de desarrollo</h4>
-            <ul>
-              <li>Editor recomendado: Visual Studio Code</li>
-              <li>Control de versiones: Git/GitHub</li>
-              <li>Pruebas SQA: unitarias, integración, rendimiento</li>
+          <section id="soporte" class="py-8 border-b border-gray-200">
+            <h2>9. Solución de Problemas</h2>
+            <ul class="mt-4 space-y-3">
+              <li class="flex items-start">
+                <span class="inline-block w-3 h-3 rounded-full bg-red-500 mt-1 mr-3" aria-hidden="true"></span>
+                <div class="text-gray-800"><span class="font-colombia-bold text-red-600">GPS Fallando:</span> Revisa permisos de ubicación.</div>
+              </li>
+              <li class="flex items-start">
+                <span class="inline-block w-3 h-3 rounded-full bg-red-500 mt-1 mr-3" aria-hidden="true"></span>
+                <div class="text-gray-800"><span class="font-colombia-bold text-red-600">Emergencias sin respuesta:</span> Problemas o inactividad del organismo encargado.</div>
+              </li>
+              <li class="flex items-start">
+                <span class="inline-block w-3 h-3 rounded-full bg-yellow-400 mt-1 mr-3" aria-hidden="true"></span>
+                <div class="text-gray-800"><span class="font-colombia-bold text-yellow-600">Asistente lento:</span> Puede ser mantenimiento del servidor.</div>
+              </li>
+              <li class="flex items-start">
+                <span class="inline-block w-3 h-3 rounded-full bg-green-500 mt-1 mr-3" aria-hidden="true"></span>
+                <div class="text-gray-800"><span class="font-colombia-bold text-green-600">App no abre:</span> Intenta reinstalar la versión más reciente.</div>
+              </li>
             </ul>
+          </section>
 
-            <h4>Seguridad</h4>
-            <p>Claves en .env, comunicación TLS/SSL, normas ISO 27001/27002 y roles con permisos definidos.</p>
-
+          <section id="tecnico" class="py-8 border-b border-gray-200">
+            <h2>10. Stack Técnico</h2>
+            <p class="text-gray-700 mt-3">Construido sobre <strong>React Native &amp; Expo</strong>. Backend con <strong>TypeScript</strong> y <strong>NeonDB</strong>. Autenticación por <strong>Clerk</strong> e Inteligencia Artificial potenciada por <a href="#" class="text-blue-600">Google Gemini</a>.</p>
           </section>
 
           <section id="creditos" class="py-8">
-            <h2>11. Créditos y contacto</h2>
-            <p><strong>Equipo:</strong> Cristhian Camilo Durán, Jesús Duban Pérez, Juan Diego Monsalve, Jesús Antonio García.</p>
-            <p><strong>Instructor:</strong> Mario Alexander Velasco Vera</p>
-            <p><strong>Soporte:</strong> cenatrack.soporte@gmail.com</p>
-            <p><a class="btn" href="#header">Volver arriba</a></p>
+            <h2>11. Créditos</h2>
+            <p class="mt-3 text-gray-700"><strong>Equipo:</strong> Camilo Durán, Jesús Pérez., Juan Diego Monsalve., Jesús Antonio García.</p>
+            <p class="mt-2 text-gray-700"><strong>Instructor:</strong> Mario Alexander Velasco Vera</p>
+            <p class="mt-4"><a href="#header" class="back-to-top inline-block bg-green-500 hover:bg-green-600 text-white font-bold text-xl px-8 py-3 rounded-full shadow-md" role="button" aria-label="Volver arriba">Volver arriba</a></p>
           </section>
         </div>
       </main>
@@ -523,6 +633,29 @@
           });
         });
       }
+
+      // Smooth scroll for "Volver arriba" buttons with offset for the sticky header
+      document.querySelectorAll('a.back-to-top[href^="#"]').forEach(a => {
+        a.addEventListener('click', (e) => {
+          e.preventDefault();
+          const targetId = a.getAttribute('href');
+          const header = document.getElementById('header');
+          // If the click is specifically to the header (top of page), scroll to absolute top
+          if (targetId === '#header' || targetId === '#top' || !targetId || targetId === '#') {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            // Ensure focus for accessibility
+            setTimeout(() => { header && header.focus({ preventScroll: true }); }, 700);
+            return;
+          }
+
+          const target = document.querySelector(targetId) || document.body;
+          const offset = header ? header.offsetHeight + 8 : 80; // small spacing
+          const top = Math.max(0, target.getBoundingClientRect().top + window.scrollY - offset);
+          window.scrollTo({ top, behavior: 'smooth' });
+          // Ensure focus for accessibility
+          setTimeout(() => { (target instanceof HTMLElement) && target.focus({ preventScroll: true }); }, 700);
+        });
+      });
       });
   </script>
 
