@@ -285,9 +285,32 @@
         <!-- MENU DESKTOP -->
         <div class="hidden md:flex items-center space-x-6 lg:space-x-10">
             <a href="#inicio" class="nav-link text-2xl font-colombia-bold">Inicio</a>
-            <a href="#objetivos" class="nav-link text-2xl font-colombia-bold">Objetivos</a>
-            <a href="#justificacion" class="nav-link text-2xl font-colombia-bold">Justificación</a>
-            <a href="#metodologia" class="nav-link text-2xl font-colombia-bold">Metodología</a>
+            <div class="relative group">
+        <button class="nav-link text-2xl font-colombia-bold flex items-center space-x-1">
+            <span>Proyecto</span>
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+        </button>
+
+                
+        <!-- Contenido del dropdown -->
+        <div
+            class="absolute left-0 mt-2 hidden group-hover:block bg-white shadow-lg rounded-xl py-3 px-4 space-y-2 z-50">
+
+            <a href="#objetivos" class="block nav-link text-xl font-colombia-bold hover:opacity-70">
+                Objetivos
+            </a>
+
+            <a href="#justificacion" class="block nav-link text-xl font-colombia-bold hover:opacity-70">
+                Justificación
+            </a>
+
+            <a href="#metodologia" class="block nav-link text-xl font-colombia-bold hover:opacity-70">
+                Metodología
+            </a>
+        </div>
+    </div>
             <a href="manual_Usuario.html" class="nav-link text-2xl font-colombia-bold">Manuales</a>
             <a href="#features" class="nav-link text-2xl font-colombia-bold">Módulos</a>
             <a href="#vision" class="nav-link  text-2xl font-colombia-bold">Visión</a>
