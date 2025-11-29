@@ -285,37 +285,43 @@
         <!-- MENU DESKTOP -->
         <div class="hidden md:flex items-center space-x-6 lg:space-x-10">
             <a href="#inicio" class="nav-link text-2xl font-colombia-bold">Inicio</a>
-            <div class="relative group">
-        <button class="nav-link text-2xl font-colombia-bold flex items-center space-x-1">
-            <span>Proyecto</span>
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-            </svg>
-        </button>
+           <div class="relative group inline-block">
 
-                
-        <!-- Contenido del dropdown -->
-        <div
-            class="absolute left-0 mt-2 hidden group-hover:block bg-white shadow-lg rounded-xl py-3 px-4 space-y-2 z-50">
-<ul>
-    
-           <li> <a href="#objetivos" class="block nav-link text-xl font-colombia-bold hover:opacity-70">
-                Objetivos
-            </a>
-            </li>
-            <li>
-            <a href="#justificacion" class="block nav-link text-xl font-colombia-bold hover:opacity-70">
-                Justificación
-            </a>
-            </li>
-            <li>
-            <a href="#metodologia" class="block nav-link text-xl font-colombia-bold hover:opacity-70">
-                Metodología
-            </a>
-            </li>
-</ul>
-        </div>
-    </div>
+  <button
+    class="nav-link text-2xl font-colombia-bold flex items-center space-x-1 cursor-pointer group">
+      <span>Proyecto</span>
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+      </svg>
+  </button>
+
+  <!-- Dropdown -->
+  <div
+    class="absolute left-0 mt-2 opacity-0 pointer-events-none group-hover:opacity-100 
+           group-hover:pointer-events-auto transition-all duration-200 
+           bg-white shadow-lg rounded-xl py-3 px-4 space-y-2 z-50">
+
+    <ul>
+      <li>
+        <a href="#objetivos" class="block nav-link text-xl font-colombia-bold hover:opacity-70">
+          Objetivos
+        </a>
+      </li>
+      <li>
+        <a href="#justificacion" class="block nav-link text-xl font-colombia-bold hover:opacity-70">
+          Justificación
+        </a>
+      </li>
+      <li>
+        <a href="#metodologia" class="block nav-link text-xl font-colombia-bold hover:opacity-70">
+          Metodología
+        </a>
+      </li>
+    </ul>
+
+  </div>
+
+</div>
             <a href="manual_Usuario.html" class="nav-link text-2xl font-colombia-bold">Manuales</a>
             <a href="#features" class="nav-link text-2xl font-colombia-bold">Módulos</a>
             <a href="#vision" class="nav-link  text-2xl font-colombia-bold">Visión</a>
